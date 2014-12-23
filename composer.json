@@ -1,0 +1,26 @@
+{
+    "name": "hemio/form",
+    "type": "library",
+    "description": "Object oriented HTML5 forms library",
+    "keywords": ["html"],
+    "homepage": "http://github.com/qua-bla/form",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Michael Herold",
+            "email": "quabla@hemio.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.4.*",
+        "apigen/apigen": "~2.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "hemio\\form\\": "src"
+        }
+    }
+}
