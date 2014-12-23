@@ -1,0 +1,1 @@
+../vendor/hemio/html/tests/LoadAllClassesTest.php
