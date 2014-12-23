@@ -31,7 +31,7 @@ abstract class Form extends \hemio\html\Form {
         $this->get = $_GET;
         $this->setAttribute('name', $this->getHtmlName());
         $this->setId($this->getHtmlName());
-        $this->addInheritableAppendage('_INPUT_SINGLE_TEMPLATE', new TemplateFormLineP);
+        $this->addInheritableAppendage('_INPUT_SINGLE_TEMPLATE', new \hemio\form\TemplateFormLineP);
         $this->addInheritableAppendage('_FORM', $this);
     }
 
