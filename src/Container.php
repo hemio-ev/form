@@ -5,7 +5,11 @@ namespace hemio\form;
 use hemio\html;
 
 /**
- * Container
+ * Containers collect several HTML generating elements without
+ * adding additional visible structure to the output. They basically act like
+ * (@link hemio\html\Abstract_\ElementContent) without producing an element tag.
+ * 
+ * @since 1.0
  */
 class Container implements \hemio\html\Interface_\MaintainsChilds, \hemio\html\Interface_\HtmlCode {
 

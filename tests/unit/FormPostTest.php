@@ -6,16 +6,18 @@
  * and open the template in the editor.
  */
 
+namespace hemio\form;
+
 /**
  * Description of FormPostTest
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class FormPostTest extends Helpers {
+class FormPostTest extends \Helpers {
 
     public function test1() {
-        $form = new hemio\form\FormPost('form-1');
-        $form->addChild(new \hemio\form\InputSubmit('submit-1'));
+        $form = new FormPost('form-1');
+        $form->addChild(new InputSubmit('submit-1'));
 
         $this->_assertEqualsXmlFile($form, 'formPost.html');
     }

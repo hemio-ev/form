@@ -4,8 +4,7 @@ namespace hemio\form;
 
 use hemio\html;
 
-class InputText
-        extends Abstract_\InputSingle {
+class InputText extends Abstract_\InputSingle {
 
     public $strPlaceholder;
 
@@ -20,8 +19,7 @@ class InputText
 
     public function __toString() {
         $this->getInputElement()->setAttribute('value', $this->getValueToUse());
-        $this->getInputElement()->setAttribute('placeholder',
-                $this->strPlaceholder);
+        $this->getInputElement()->setAttribute('placeholder', $this->strPlaceholder);
 
         return parent::__toString();
     }

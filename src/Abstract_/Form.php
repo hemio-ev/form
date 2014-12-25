@@ -25,10 +25,17 @@ abstract class Form extends \hemio\html\Form {
     private $post = [];
     public $arrStoredValues = [];
 
-    public function __construct($name) {
+    public function __construct($name, array $post = null, array $get = null, array $stored = []) {
+        if ($post === null)
+            $post = $_POST;
+
+        if ($get === null)
+            $get = $_GET;
+
+        $this->post = $post;
+        $this->get = $get;
         $this->name = $name;
-        $this->post = $_POST;
-        $this->get = $_GET;
+
         $this->setAttribute('name', $this->getHtmlName());
         $this->setId($this->getHtmlName());
         $this->addInheritableAppendage('_INPUT_SINGLE_TEMPLATE', new \hemio\form\TemplateFormLineP);
@@ -36,7 +43,7 @@ abstract class Form extends \hemio\html\Form {
     }
 
     /**
-     * 
+     * @todo potentially completly useless in this functions, form elements should have this options?
      * @return TemplateFormLine
      */
     public function getLineTemplate() {
@@ -44,12 +51,13 @@ abstract class Form extends \hemio\html\Form {
     }
 
     /**
-     * check for occured errors
+     * Check for occured errors
+     * 
      * @return boolean
      */
     public function dataValid() {
         foreach (new \RecursiveIteratorIterator($this) as $child) {
-            if ($child instanceof Abstract_\Input && !$child->dataValid()) {
+            if ($child instanceof Abstract_\FormElement && !$child->dataValid()) {
                 return false;
             }
         }
@@ -57,10 +65,18 @@ abstract class Form extends \hemio\html\Form {
         return true;
     }
 
+    /**
+     * 
+     * @return string
+     */
     public function getHtmlName() {
         return 'form_' . $this->name;
     }
 
+    /**
+     * 
+     * @return string
+     */
     public function getName() {
         return $this->name;
     }
@@ -79,7 +95,9 @@ abstract class Form extends \hemio\html\Form {
     }
 
     /**
+     * Stored values like from DB?
      * 
+     * @todo unclear
      * @param string $key
      * @return mixed
      */
@@ -91,5 +109,10 @@ abstract class Form extends \hemio\html\Form {
         }
     }
 
+    /**
+     * Get value from GET or POST
+     * 
+     * @since 1.0
+     */
     abstract public function getValueUser($key);
 }

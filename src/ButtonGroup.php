@@ -11,17 +11,18 @@ namespace hemio\form;
 use hemio\html;
 
 /**
- * Description of ButtonGroup
+ * Groups a bunch of buttons
  *
- * @author schnack
+ * @since 1.0
  */
-class ButtonGroup
-        extends html\Fieldset {
+class ButtonGroup extends html\Fieldset {
 
-    //put your code here
+    /**
+     * 
+     * @param array $buttons
+     */
     public function __construct(array $buttons = []) {
-        $this->addInheritableAppendage('_INPUT_SINGLE_TEMPLATE',
-                new TemplateFormSingle());
+        $this->addInheritableAppendage('_INPUT_SINGLE_TEMPLATE', new TemplateFormSingle());
 
         foreach ($buttons as $button) {
             $this[$button->getName()] = $button;

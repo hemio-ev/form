@@ -4,6 +4,8 @@ namespace hemio\form;
 
 /**
  * Forms with the method POST
+ * 
+ * @since 1.0
  */
 class FormPost extends Abstract_\Form {
 
