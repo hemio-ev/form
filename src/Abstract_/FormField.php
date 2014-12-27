@@ -4,7 +4,10 @@ namespace hemio\form\Abstract_;
 
 use hemio\form\exception;
 
-abstract class FormElement extends \hemio\form\Container {
+/**
+ * 
+ */
+abstract class FormField extends \hemio\form\Container {
 
     protected $name = '';
 

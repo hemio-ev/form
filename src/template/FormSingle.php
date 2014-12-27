@@ -1,15 +1,15 @@
 <?php
 
-namespace hemio\form;
+namespace hemio\form\template;
 
 use hemio\html;
+use hemio\form\Abstract_;
 
 /**
  * 
  *
  */
-class TemplateFormSingle
-        extends Abstract_\TemplateFormLine {
+class FormSingle extends Abstract_\TemplateFormFieldSingle {
 
     protected $blnContentSattled = false;
     protected $objFormElement = null;
@@ -32,15 +32,14 @@ class TemplateFormSingle
         return parent::__toString();
     }
 
-    public function setFormElement(Abstract_\Input $objFormElement) {
+    public function setFormElement(Abstract_\FormFieldIn $objFormElement) {
         $this->objFormElement = $objFormElement;
     }
 
     public function sattleContent() {
         $inputHtml = $this->getInheritableAppendage('_INPUT_ELEMENT');
         if (!($inputHtml instanceof html\Interface_\InputElement))
-                trigger_error('TemplateFormSingle got no Input field',
-                    E_USER_ERROR);
+            trigger_error('TemplateFormSingle got no Input field', E_USER_ERROR);
 
         $inputForm = $this->objFormElement;
 

@@ -5,7 +5,7 @@ namespace hemio\form;
 use hemio\html;
 
 class InputTextarea
-        extends Abstract_\InputSingle {
+        extends Abstract_\FormFieldInSingle {
 
     public $strPlaceholder;
 
@@ -15,7 +15,7 @@ class InputTextarea
 
     public function __construct($name) {
         parent::__construct($name);
-        $this->init(new html\Textarea($this->inputType()));
+        $this->setInputElement(new html\Textarea($this->inputType()));
     }
 
     public function __toString() {

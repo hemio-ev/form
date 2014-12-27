@@ -3,11 +3,11 @@
 namespace hemio\form;
 use hemio\html;
 
-class InputPassword extends Abstract_\InputSingle {
+class InputPassword extends Abstract_\FormFieldInSingle {
 
     public function __construct($name) {
         parent::__construct($name);
-        $this->init(new html\Input('password'));
+        $this->setInputElement(new html\Input('password'));
     }
 
     // force the value atribute to null to prevent resending the password to clients

@@ -8,37 +8,12 @@ use hemio\html;
  * 
  *
  */
-abstract class InputSingle extends Input {
+abstract class FormFieldInSingle extends FormFieldIn {
 
     use \hemio\form\Trait_\MaintainsFilters;
 
-    public $blnRequired = false;
-    public $strDefaultValue = '';
-
-    /**
-     * 
-     * @param \hemio\html\Interface_\InputElement $inputElement
-     * @return \hemio\html\Interface_\InputElement
-     */
-    public function init(html\Interface_\InputElement $inputElement) {
-        $this->addInheritableAppendage('_INPUT_ELEMENT', $inputElement);
-        return $inputElement;
-    }
-
-    /**
-     * 
-     * @return \hemio\html\Interface_\InputElement
-     */
-    public function getInputElement() {
-        return $this->getInheritableAppendage('_INPUT_ELEMENT');
-    }
-
-    public function __toString() {
-        $template = ($this[] = $this->getTemplateClone());
-        $template->setFormElement($this);
-        $this->getInputElement()->setAttribute('required', $this->blnRequired);
-        return parent::__toString();
-    }
+    public $title = '';
+    public $defaultValue;
 
     public function getValueToUse() {
         if ($this->getValueUser() !== null)
@@ -63,7 +38,7 @@ abstract class InputSingle extends Input {
     }
 
     public function getValueDefault() {
-        return $this->getFiltered($this->strDefaultValue);
+        return $this->getFiltered($this->defaultValue);
     }
 
     public function changed() {

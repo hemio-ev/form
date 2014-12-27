@@ -52,4 +52,8 @@ class Helpers extends PHPUnit_Framework_TestCase {
         return str_replace(PHP_EOL, '', str_replace(' ', '', $obj->saveHTML()));
     }
 
+    public static function getDocumentBody() {
+        return (new hemio\html\Document(new hemio\html\String('Title')))->getHtml()->getBody();
+    }
+
 }

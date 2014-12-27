@@ -4,24 +4,45 @@ namespace hemio\form;
 
 use hemio\html;
 
-class InputText extends Abstract_\InputSingle {
+class InputText extends Abstract_\FormFieldInSingle {
 
-    public $strPlaceholder;
+    use Trait_\SingleInput;
 
-    public function inputType() {
-        return 'text';
+    public function __construct($name, $title) {
+        $this->name = $name;
+        $this->title = $title;
     }
 
-    public function __construct($name) {
-        parent::__construct($name);
-        $this->init(new html\Input($this->inputType()));
+    public function fill() {
+        $this->init(new html\Input('text'));
     }
 
+    /**
+     * @todo how generic is a placeholder?
+     * @param string $placeholder
+     */
+    public function setPlaceholder($placeholder) {
+        $this->getInputElement()->setAttribute('placeholder', $placeholder);
+    }
+
+    /**
+     * 
+     * @todo value cannot be solved in template? it dependes on the inputElement :(
+     * Maybe we can handle this via pudding the fill() to this class
+     * 
+     * 
+     * @return string
+     */
     public function __toString() {
-        $this->getInputElement()->setAttribute('value', $this->getValueToUse());
-        $this->getInputElement()->setAttribute('placeholder', $this->strPlaceholder);
+        $this->fill();
+
+        $this['_TEMPLATE']->getControl()->setAttribute('value', $this->getValueToUse());
 
         return parent::__toString();
+    }
+
+    public function getInputType() {
+        return 'text';
     }
 
 }

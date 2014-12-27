@@ -5,6 +5,7 @@ namespace hemio\form\Trait_;
 /**
  * Gives everything for the typical case, that the form element consists of
  * only one input/select/... field enbedded
+ * @deprecated since version 1.0
  */
 trait FormElementSingle {
 

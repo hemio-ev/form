@@ -2,11 +2,13 @@
 
 namespace hemio\form;
 
-class UrlRelative
-        extends Abstract_\Url {
+/**
+ * @author Michael Herold <quabla@hemio.de>
+ * @todo URL is important
+ */
+class UrlRelative extends Abstract_\Url {
 
-    public function __construct(array $arrPath = [], array $arrGet = [],
-            $strFragment = null) {
+    public function __construct(array $arrPath = [], array $arrGet = [], $strFragment = null) {
         $this->arrPath = $arrPath;
         $this->arrGet = $arrGet;
         $this->strFragment = $strFragment;

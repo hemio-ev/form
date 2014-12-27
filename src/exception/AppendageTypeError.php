@@ -17,21 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\form\Abstract_;
+namespace hemio\form\exception;
 
 /**
- * Description of FormElementTest
+ * This exception is raised if an appendage has an unexpected type.
+ *  Unfortunately there is no other way to ensure type safety in appendages.
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class FormElementTest extends \Helpers {
-
-    /**
-     * @expectedException hemio\form\exception\NotLazyEnough
-     */
-    public function testNotLazyEnough() {
-        $input = new \hemio\form\InputText('name', 'Title');
-        $input->getForm();
-    }
-
+class AppendageTypeError extends \Exception {
+    
 }

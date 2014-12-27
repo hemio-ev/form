@@ -1,12 +1,12 @@
 <?php
 
-namespace hemio\form;
+#namespace hemio\form;
 
 /**
  * 
  * @param string $message
  * @return \hemio\html\String
  */
-function _($message) {
+function __($message) {
     return new \hemio\html\String(\gettext($message));
 }

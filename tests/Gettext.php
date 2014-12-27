@@ -9,17 +9,17 @@
 namespace hemio\form;
 
 /**
- * Description of FormPostTest
+ * Test gettext features
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class FormPostTest extends \Helpers {
+class Gettext extends \Helpers {
 
-    public function test1() {
-        $form = new FormPost('form-1');
-        $form->addChild(new InputText('text_input', 'Text input'));
+    public function testBasic() {
+        $doc = self::getDocumentBody();
+        $doc->addChild(_('Basic test string'));
 
-        $this->_assertEqualsXmlFile($form, 'formPost.html');
+        $this->_assertEqualsXmlFile($doc, 'gettextBasic.html');
     }
 
 }

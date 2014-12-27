@@ -8,7 +8,7 @@ use \hemio\form;
  * 
  *
  */
-class Template_FormLineCheckbox extends form\Abstract_\TemplateFormLine {
+class Template_FormLineCheckbox extends form\Abstract_\TemplateFormFieldSingle {
 
     protected $blnContentSattled = false;
     protected $objFormElement = null;
@@ -36,7 +36,7 @@ class Template_FormLineCheckbox extends form\Abstract_\TemplateFormLine {
         return parent::__toString();
     }
 
-    public function setFormElement(Abstract_\Input $objFormElement) {
+    public function setFormElement(Abstract_\FormFieldIn $objFormElement) {
         $this->objFormElement = $objFormElement;
     }
 

@@ -4,12 +4,17 @@ namespace hemio\form;
 
 use hemio\html;
 
+
+/**
+ * @deprecated since version 1.0
+ * @todo ButtonSubmit?
+ */
 class InputSelect
-        extends Abstract_\InputSingle {
+        extends Abstract_\FormFieldInSingle {
 
     public function __construct($name) {
         parent::__construct($name);
-        $this->init(new html\Select());
+        $this->setInputElement(new html\Select());
     }
 
     public function addOption($strValue, $strContent) {

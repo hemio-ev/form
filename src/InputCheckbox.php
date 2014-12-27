@@ -5,7 +5,7 @@ namespace hemio\form;
 use hemio\html;
 
 class InputCheckbox
-        extends Abstract_\InputSingle {
+        extends Abstract_\FormFieldInSingle {
 
     public $strPlaceholder;
 
@@ -17,7 +17,7 @@ class InputCheckbox
         parent::__construct($name);
         $this->addInheritableAppendage('_INPUT_SINGLE_TEMPLATE',
                 new Template_FormLineCheckbox());
-        $this->init(new html\Input($this->inputType()));
+        $this->setInputElement(new html\Input($this->inputType()));
     }
 
     public function __toString() {

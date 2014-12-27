@@ -5,7 +5,7 @@ namespace hemio\form;
 use hemio\html;
 
 class InputPasswordNew
-        extends Abstract_\Input {
+        extends Abstract_\FormFieldIn {
 
     public function __toString() {
         $template = $this->getInheritableAppendage('_INPUT_SINGLE_TEMPLATE');

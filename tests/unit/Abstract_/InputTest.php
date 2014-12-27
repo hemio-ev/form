@@ -20,18 +20,18 @@
 namespace hemio\form\Abstract_;
 
 /**
- * Description of FormElementTest
+ * Description of InputTest
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class FormElementTest extends \Helpers {
+class InputTest extends \Helpers {
 
     /**
-     * @expectedException hemio\form\exception\NotLazyEnough
+     * @expectedException \hemio\form\exception\NotLazyEnough
      */
     public function testNotLazyEnough() {
-        $input = new \hemio\form\InputText('name', 'Title');
-        $input->getForm();
+        $input = new \hemio\form\InputText('a', 'B');
+        $input->getSingleTemplateClone();
     }
 
 }

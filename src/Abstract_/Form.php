@@ -2,6 +2,8 @@
 
 namespace hemio\form\Abstract_;
 
+use hemio\form\template;
+
 abstract class Form extends \hemio\html\Form {
 
     use \hemio\form\Trait_\MaintainsHtmlL10n;
@@ -38,13 +40,13 @@ abstract class Form extends \hemio\html\Form {
 
         $this->setAttribute('name', $this->getHtmlName());
         $this->setId($this->getHtmlName());
-        $this->addInheritableAppendage('_INPUT_SINGLE_TEMPLATE', new \hemio\form\TemplateFormLineP);
+        $this->addInheritableAppendage('_INPUT_SINGLE_TEMPLATE', new template\FormLineP);
         $this->addInheritableAppendage('_FORM', $this);
     }
 
     /**
      * @todo potentially completly useless in this functions, form elements should have this options?
-     * @return TemplateFormLine
+     * @return TemplateFormFieldSingle
      */
     public function getLineTemplate() {
         return $this->getInheritableAppendage('_INPUT_SINGLE_TEMPLATE');
@@ -57,7 +59,7 @@ abstract class Form extends \hemio\html\Form {
      */
     public function dataValid() {
         foreach (new \RecursiveIteratorIterator($this) as $child) {
-            if ($child instanceof Abstract_\FormElement && !$child->dataValid()) {
+            if ($child instanceof Abstract_\FormField && !$child->dataValid()) {
                 return false;
             }
         }
