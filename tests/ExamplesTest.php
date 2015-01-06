@@ -50,10 +50,13 @@ class ExamplesTest extends \Helpers {
 
         $inputPassword = new FieldPassword('input_password');
         $section[] = $inputPassword;
-        
+
         $textarea = new FieldTextarea('textarea', _('Long Text'));
         $section[] = $textarea;
-        
+
+        $checkbox = new FieldCheckbox('checkbox', _('Checkbox'));
+        $section[] = $checkbox;
+
 
         $form->arrStoredValues = [
             'input_text' => 'Default Text',
@@ -75,10 +78,11 @@ class ExamplesTest extends \Helpers {
 
         $form = $doc->getHtml()->getBody()['form'];
 
+        // default template to patch
         $template = $form->getSingleControlTemplate();
+
+        // patch template for <select> controls
         $templateSelect = clone $template;
-
-
         $templateSelect['P']['SPAN'] = new \hemio\html\Span();
         $templateSelect['P']['SPAN']->addCssClass('select');
         $templateSelect->setPostInitHook(function ($template) {
@@ -87,6 +91,24 @@ class ExamplesTest extends \Helpers {
         });
 
         $form->addInheritableAppendage(FormPost::SINGLE_CONTROL_TEMPLATE . '_SELECT', $templateSelect);
+
+        // patch template for <input type=checkbox /> controls
+        $templateSwitch = clone $template;
+        $templateSwitch->setPostInitHook(function ($template) {
+            $template->control->addCssClass('switch');
+            $template['P']->addChildBeginning($template->control);
+            unset($template['P']['CONTROL']);
+
+            $labelText = $template['P']['LABEL'][0];
+            unset($template['P']['LABEL'][0]);
+            $spanLabel = new \hemio\html\Span();
+            $spanLabel[] = $labelText;
+
+            $template['P']['LABEL'][] = $spanLabel;
+            $template['P']['LABEL'][] = new \hemio\html\Span();
+        });
+
+        $form->addInheritableAppendage(FormPost::SINGLE_CONTROL_TEMPLATE . '_checkbox', $templateSwitch);
 
 
         $this->_assertEqualsXmlFile($doc, 'examplesAdjustedForm.html');
