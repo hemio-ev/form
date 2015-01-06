@@ -47,10 +47,20 @@ abstract class Form extends \hemio\html\Form {
     /**
      * @todo potentially completly useless in this functions, form elements should have this options?
      * @return TemplateFormFieldSingle
+     * @deprecated since version 1.0
      */
     public function getLineTemplate() {
-        return $this->getInheritableAppendage('_INPUT_SINGLE_TEMPLATE');
+        return $this->getInheritableAppendage(self::SINGLE_CONTROL_TEMPLATE);
     }
+
+    /**
+     * @return TemplateFormFieldSingle
+     */
+    public function getSingleControlTemplate() {
+        return $this->getInheritableAppendage(self::SINGLE_CONTROL_TEMPLATE);
+    }
+    
+    const SINGLE_CONTROL_TEMPLATE = '_INPUT_SINGLE_TEMPLATE';
 
     /**
      * Check for occured errors

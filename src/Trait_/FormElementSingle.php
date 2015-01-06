@@ -3,6 +3,7 @@
 namespace hemio\form\Trait_;
 
 use hemio\form\exception;
+use hemio\form;
 
 /**
  * Gives everything for the typical case, that the form element consists of
@@ -35,10 +36,11 @@ trait FormElementSingle {
      * @throws exception\AppendageTypeError
      */
     public function getSingleTemplateClone($special = null) {
-        $appendageName = '_INPUT_SINGLE_TEMPLATE_' . $special;
+        
+        $appendageName = form\FormPost::SINGLE_CONTROL_TEMPLATE . '_' . $special;
 
         if ($this->getInheritableAppendage($appendageName) === null) {
-            $appendageName = '_INPUT_SINGLE_TEMPLATE';
+            $appendageName = form\FormPost::SINGLE_CONTROL_TEMPLATE;
         }
 
         $template = $this->getInheritableAppendage($appendageName);

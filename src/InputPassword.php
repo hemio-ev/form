@@ -1,13 +1,22 @@
 <?php
 
 namespace hemio\form;
+
 use hemio\html;
 
 class InputPassword extends Abstract_\FormFieldInSingle {
 
-    public function __construct($name) {
-        parent::__construct($name);
-        $this->setInputElement(new html\Input('password'));
+    use Trait_\SingleInput;
+
+    public function getInputType() {
+        return 'password';
+    }
+
+    public function __construct($name, $title = null) {
+        if ($title === null)
+            $title = _('Password');
+
+        $this->init($name, $title, new html\Input($this->getInputType()));
     }
 
     // force the value atribute to null to prevent resending the password to clients
@@ -34,6 +43,17 @@ class InputPassword extends Abstract_\FormFieldInSingle {
 
     public function setCheckPasswordOkClosure(\Closure $clsCheckPassword) {
         $this->clsCheckPasswordOk = $clsCheckPassword;
+    }
+
+    /**
+     * 
+     * @return string
+     */
+    public function __toString() {
+        if (!$this->filled)
+            $this->fill();
+
+        return parent::__toString();
     }
 
 }

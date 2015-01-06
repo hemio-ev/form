@@ -1,23 +1,29 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Title</title><meta charset="utf-8" /><link rel="stylesheet" type="text/css" href="style.css" />
-    </head>
-    <body>
-        <form name="form_name" id="form_name" method="post">
-            <input type="hidden" name="name___form_identifier" id="name___form_identifier" /><section>
-                <p>
-                    <label>Text</label><input type="text" name="name__input_text" title="Text" id="name__input_text" value="" />
-                </p>
-                <p>
-                    <label>Select</label><select name="name__select" title="Select" id="name__select"><option value="value1">Value 1</option><option value="value2">Value 2</option><option value="value3">Value 3</option><option value="value4">Value 4</option><option value="value5">Value 5</option><option value="value6">Value 6</option></select>
-                </p>
+<head>
+<title>Title</title><meta charset="utf-8" /><link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+<form name="form_name" id="form_name" method="post">
+<input type="hidden" name="name___form_identifier" id="name___form_identifier" /><section>
+<p>
+<label for="name__input_text">Text</label><input type="text" name="name__input_text" title="Text" id="name__input_text" value="Default Text" />
+</p>
+<p>
+<label for="name__select">Select</label><span class="select "><select name="name__select" title="Select" id="name__select"><option value="value1">Value 1</option><option value="value2">Value 2</option><option value="value3">Value 3</option><option value="value4">Value 4</option><option value="value5">Value 5</option><option value="value6">Value 6</option></select></span>
+</p>
+<p>
+<label for="name__input_password">Password</label><input type="password" name="name__input_password" title="Password" id="name__input_password" />
+</p>
+<p>
+<label for="name__textarea">Long Text</label><textarea name="name__textarea" title="Long Text" id="name__textarea"></textarea>
+</p>
 
-            </section>
+</section>
 
-        </form>
+</form>
 
-    </body>
+</body>
 
 </html>

@@ -35,7 +35,7 @@ class ExamplesTest extends \Helpers {
 
         $form = new FormPost('name');
         $body = $doc->getHtml()->getBody();
-        $body[] = $form;
+        $body['form'] = $form;
 
         $section = new \hemio\html\Section();
         $form[] = $section;
@@ -43,10 +43,22 @@ class ExamplesTest extends \Helpers {
         $inputText = new InputText('input_text', _('Text'));
         $section[] = $inputText;
 
-        $inputSelect = new InputSelect('select', _('Select'));
-        foreach ([1, 2, 3, 4, 5, 6]as $i)
-            $inputSelect->addOption('value' . $i, _('Value ' . $i));
-        $section[] = $inputSelect;
+        $select = new InputSelect('select', _('Select'));
+        foreach ([1, 2, 3, 4, 5, 6] as $i)
+            $select->addOption('value' . $i, _('Value ' . $i));
+        $section[] = $select;
+
+        $inputPassword = new InputPassword('input_password');
+        $section[] = $inputPassword;
+        
+        $textarea = new InputTextarea('textarea', _('Long Text'));
+        $section[] = $textarea;
+        
+
+        $form->arrStoredValues = [
+            'input_text' => 'Default Text',
+            'input_password' => 'my-secret-password'
+        ];
 
         return $doc;
     }
@@ -60,6 +72,22 @@ class ExamplesTest extends \Helpers {
     public function test2() {
         $doc = $this->exampleForm();
         $doc->getHtml()->getHead()->addCssFile('style.css');
+
+        $form = $doc->getHtml()->getBody()['form'];
+
+        $template = $form->getSingleControlTemplate();
+        $templateSelect = clone $template;
+
+
+        $templateSelect['P']['SPAN'] = new \hemio\html\Span();
+        $templateSelect['P']['SPAN']->addCssClass('select');
+        $templateSelect->setPostInitHook(function ($template) {
+            unset($template['P']['CONTROL']);
+            $template['P']['SPAN']['CONTROL'] = $template->control;
+        });
+
+        $form->addInheritableAppendage(FormPost::SINGLE_CONTROL_TEMPLATE . '_SELECT', $templateSelect);
+
 
         $this->_assertEqualsXmlFile($doc, 'examplesAdjustedForm.html');
     }
