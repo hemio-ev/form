@@ -4,7 +4,7 @@ namespace hemio\form;
 
 use hemio\html;
 
-class InputTextarea extends Abstract_\FormFieldInSingle {
+class FieldTextarea extends Abstract_\FormFieldInSingle {
 
     use \hemio\form\Trait_\FormElementSingle;
 

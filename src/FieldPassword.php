@@ -4,7 +4,7 @@ namespace hemio\form;
 
 use hemio\html;
 
-class InputPassword extends Abstract_\FormFieldInSingle {
+class FieldPassword extends Abstract_\FormFieldInSingle {
 
     use Trait_\SingleInput;
 

@@ -40,18 +40,18 @@ class ExamplesTest extends \Helpers {
         $section = new \hemio\html\Section();
         $form[] = $section;
 
-        $inputText = new InputText('input_text', _('Text'));
+        $inputText = new FieldText('input_text', _('Text'));
         $section[] = $inputText;
 
-        $select = new InputSelect('select', _('Select'));
+        $select = new FieldSelect('select', _('Select'));
         foreach ([1, 2, 3, 4, 5, 6] as $i)
             $select->addOption('value' . $i, _('Value ' . $i));
         $section[] = $select;
 
-        $inputPassword = new InputPassword('input_password');
+        $inputPassword = new FieldPassword('input_password');
         $section[] = $inputPassword;
         
-        $textarea = new InputTextarea('textarea', _('Long Text'));
+        $textarea = new FieldTextarea('textarea', _('Long Text'));
         $section[] = $textarea;
         
 

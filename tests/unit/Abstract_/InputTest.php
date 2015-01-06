@@ -30,7 +30,7 @@ class InputTest extends \Helpers {
      * @expectedException \hemio\form\exception\NotLazyEnough
      */
     public function testNotLazyEnough() {
-        $input = new \hemio\form\InputText('a', 'B');
+        $input = new \hemio\form\FieldText('a', 'B');
         $input->getSingleTemplateClone();
     }
 

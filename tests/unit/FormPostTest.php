@@ -17,7 +17,7 @@ class FormPostTest extends \Helpers {
 
     public function test1() {
         $form = new FormPost('form-1');
-        $form->addChild(new InputText('text_input', 'Text input'));
+        $form->addChild(new FieldText('text_input', 'Text input'));
 
         $this->_assertEqualsXmlFile($form, 'formPost.html');
     }

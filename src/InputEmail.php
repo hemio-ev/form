@@ -2,7 +2,7 @@
 
 namespace hemio\form;
 
-class InputEmail extends InputText {
+class InputEmail extends FieldText {
 
     public function inputType() {
         return 'email';

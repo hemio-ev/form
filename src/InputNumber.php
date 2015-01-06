@@ -3,7 +3,7 @@
 namespace hemio\form;
 
 class InputNumber
-        extends InputText {
+        extends FieldText {
 
     public function inputType() {
         return 'number';

@@ -8,7 +8,7 @@ use hemio\html;
  * @deprecated since version 1.0
  * @todo ButtonSubmit?
  */
-class InputSelect extends Abstract_\FormFieldInSingle {
+class FieldSelect extends Abstract_\FormFieldInSingle {
 
     use Trait_\FormElementSingle;
 

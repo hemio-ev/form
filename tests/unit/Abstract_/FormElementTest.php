@@ -30,7 +30,7 @@ class FormElementTest extends \Helpers {
      * @expectedException hemio\form\exception\NotLazyEnough
      */
     public function testNotLazyEnough() {
-        $input = new \hemio\form\InputText('name', 'Title');
+        $input = new \hemio\form\FieldText('name', 'Title');
         $input->getForm();
     }
 

@@ -2,7 +2,7 @@
 
 namespace hemio\form;
 
-class InputDomain extends InputText {
+class InputDomain extends FieldText {
 
     public function blnDataValid() {
         return parent::blnDataValid();
