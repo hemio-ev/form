@@ -19,7 +19,7 @@
 
 namespace hemio\form\Trait_;
 
-use hemio\form\exception;
+use hemio\html;
 
 /**
  * Description of FieldSingleInput
@@ -27,13 +27,8 @@ use hemio\form\exception;
  * @author Michael Herold <quabla@hemio.de>
  */
 trait SingleInput {
-    #protected $title;
 
-    /**
-     *
-     * @var hemio\html\Input
-     */
-    protected $inputElement;
+    use FormElementSingle;
 
     /**
      * @return string Type value for input element
@@ -42,33 +37,26 @@ trait SingleInput {
 
     /**
      * 
-     * @return \hemio\form\Abstract_\TemplateFormFieldSingle
+     * @return html\Input
      */
-    public function init(\hemio\html\Interface_\FormControl $control) {
-        $template = $this->getSingleTemplateClone();
-        $this['_TEMPLATE'] = $template;
-        $template->init($this, $control);
-        return $template;
+    public function getControlElement() {
+        return $this->control;
     }
 
     /**
      * 
      * @return \hemio\form\Abstract_\TemplateFormFieldSingle
-     * @throws exception\NotLazyEnough
-     * @throws exception\AppendageTypeError
      */
-    public function getSingleTemplateClone() {
-        $template = $this->getInheritableAppendage('_INPUT_SINGLE_TEMPLATE');
+    public function fill() {
+        $template = $this->getSingleTemplateClone($this->getInputType());
 
-        if ($template instanceof \hemio\form\Abstract_\TemplateFormFieldSingle) {
-            return clone $template;
-        } elseif ($template === null) {
-            throw new exception\NotLazyEnough(
-            'There is no "_INPUT_SINGLE_TEMPLATE" available for this Input');
-        } else {
-            throw new exception\AppendageTypeError(
-            'Not an istance of TemplateFormFieldSingle "_INPUT_SINGLE_TEMPLATE"');
-        }
+        $this['_TEMPLATE'] = $template;
+        $template->init($this, $this->control);
+        $this->control->setAttribute('value', $this->getValueToUse());
+
+        $this->filled = true;
+
+        return $template;
     }
 
 }

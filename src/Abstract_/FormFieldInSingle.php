@@ -15,6 +15,18 @@ abstract class FormFieldInSingle extends FormFieldIn {
     public $title = '';
     public $defaultValue;
 
+    /**
+     * 
+     * @param string $name
+     * @param string $title
+     * @param html\Interface_\Submittable $control
+     */
+    public function init($name, $title, $control) {
+        $this->name = $name;
+        $this->title = $title;
+        $this->control = $control;
+    }
+
     public function getValueToUse() {
         if ($this->getValueUser() !== null)
             return $this->getValueUser();

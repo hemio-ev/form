@@ -1,21 +1,17 @@
 <?php
 
 namespace hemio\form\template;
+
 use \hemio\html;
 use \hemio\form;
 
 /**
  * 
- *
  */
 class Template_FormLineCheckbox extends form\Abstract_\TemplateFormFieldSingle {
 
-    protected $blnContentSattled = false;
-    protected $objFormElement = null;
-    public $value = '';
-
     public function __construct() {
-        $this['_INPUT_ELEMENT'] = new Container();
+        $this['_INPUT_ELEMENT'] = new html\Input('checkbox');
         $this['_LABEL'] = new html\Label();
     }
 
@@ -44,7 +40,7 @@ class Template_FormLineCheckbox extends form\Abstract_\TemplateFormFieldSingle {
         $inputHtml = $this->getInheritableAppendage('_INPUT_ELEMENT');
         if (!($inputHtml instanceof html\Interface_\InputElement))
             trigger_error('TemplateFormLineP got no Input field', E_USER_ERROR);
-        
+
         $inputForm = $this->objFormElement;
 
         if ($inputHtml !== null && $inputForm !== null) {

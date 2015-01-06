@@ -17,13 +17,13 @@ abstract class TemplateFormFieldSingle extends Template {
 
     /**
      *
-     * @var \hemio\html\Interface_\FormControl
+     * @var \hemio\html\Interface_\Submittable
      */
     protected $control;
 
     /**
      * 
-     * @return \hemio\html\Interface_\FormControl
+     * @return \hemio\html\Interface_\Submittable
      */
     public function getControl() {
         return $this->control;
@@ -31,10 +31,10 @@ abstract class TemplateFormFieldSingle extends Template {
 
     /**
      * 
-     * @param \hemio\html\Interface_\FormControl $field
-     * @return \hemio\html\Interface_\FormControl
+     * @param \hemio\html\Interface_\Submittable $control
+     * @return \hemio\html\Interface_\Submittable
      */
-    public function setField(\hemio\html\Interface_\FormControl $control) {
+    public function setField(\hemio\html\Interface_\Submittable $control) {
         $this->control = $control;
         return $control;
     }

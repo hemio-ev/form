@@ -2,10 +2,11 @@
 
 namespace hemio\form\Trait_;
 
+use hemio\form\exception;
+
 /**
  * Gives everything for the typical case, that the form element consists of
  * only one input/select/... field enbedded
- * @deprecated since version 1.0
  */
 trait FormElementSingle {
 
@@ -16,39 +17,41 @@ trait FormElementSingle {
     protected $paragraph;
 
     /**
-     * Label containing the element
-     * @var \html\Label
-     */
-    protected $label;
-
-    /**
      * Element something like Input/Select/...
-     * @var html\Interface_\InputElement
+     * @var html\Interface_\Submittable
      */
-    protected $element;
-
-    public function init(\hemio\html\Interface_\InputElement $element) {
-        $this->paragraph = new html\P();
-        $this->label = $this->paragraph->addChild(new \html\Label());
-        $this->element = $this->label->addChild($element);
-    }
+    protected $control;
 
     /**
-     * Adds a css class to the paragraph. Designs of the label and the element
-     * should be realized via the fact that they are childs of the paragraph.
+     *
+     * @var boolean
+     */
+    protected $filled = false;
+
+    /**
      * 
-     * @param string $className
+     * @return \hemio\form\Abstract_\TemplateFormFieldSingle
+     * @throws exception\NotLazyEnough
+     * @throws exception\AppendageTypeError
      */
-    public function addCssClass($className) {
-        $this->paragrah->addCssClass($className);
-    }
+    public function getSingleTemplateClone($special = null) {
+        $appendageName = '_INPUT_SINGLE_TEMPLATE_' . $special;
 
-    /**
-     * @see addCssClass()
-     * @param string $className
-     */
-    public function removeCssClass($className) {
-        $this->paragrah->removeCssClass($className);
+        if ($this->getInheritableAppendage($appendageName) === null) {
+            $appendageName = '_INPUT_SINGLE_TEMPLATE';
+        }
+
+        $template = $this->getInheritableAppendage($appendageName);
+
+        if ($template instanceof \hemio\form\Abstract_\TemplateFormFieldSingle) {
+            return clone $template;
+        } elseif ($template === null) {
+            throw new exception\NotLazyEnough(
+            sprintf('There is no "%s" available for this Input', $appendageName));
+        } else {
+            throw new exception\AppendageTypeError(
+            sprintf('Not an istance of TemplateFormFieldSingle "%s"', $appendageName));
+        }
     }
 
 }
