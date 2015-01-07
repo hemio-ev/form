@@ -14,6 +14,12 @@ abstract class FormFieldInSingle extends FormFieldIn {
 
     public $title = '';
     public $defaultValue;
+    
+    /**
+     *
+     * @var boolean 
+     */
+    protected $filled = false;
 
     /**
      * 
@@ -59,6 +65,18 @@ abstract class FormFieldInSingle extends FormFieldIn {
 
     public function describe() {
         return 'INPUT';
+    }
+    
+    
+    /**
+     * 
+     * @return string
+     */
+    public function __toString() {
+        if (!$this->filled)
+            $this->fill();
+
+        return parent::__toString();
     }
 
 }

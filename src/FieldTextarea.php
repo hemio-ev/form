@@ -31,10 +31,4 @@ class FieldTextarea extends Abstract_\FormFieldInSingle {
         return $template;
     }
 
-    public function __toString() {
-        $this->fill();
-
-        return parent::__toString();
-    }
-
 }

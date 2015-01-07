@@ -2,14 +2,20 @@
 
 namespace hemio\form;
 
-class InputEmail extends FieldText {
+/**
+ * @todo Not extend FieldText
+ */
+class FieldEmail extends FieldText {
 
-    public function inputType() {
+    public function getInputType() {
         return 'email';
     }
 
-    public function __construct($name) {
-        parent::__construct($name);
+    public function __construct($name, $title = null) {
+        if ($title === null)
+            $title = _('Email Address');
+
+        $this->init($name, $title, new \hemio\html\Input($this->getInputType()));
     }
 
     public function inputValid() {

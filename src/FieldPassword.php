@@ -45,15 +45,4 @@ class FieldPassword extends Abstract_\FormFieldInSingle {
         $this->clsCheckPasswordOk = $clsCheckPassword;
     }
 
-    /**
-     * 
-     * @return string
-     */
-    public function __toString() {
-        if (!$this->filled)
-            $this->fill();
-
-        return parent::__toString();
-    }
-
 }

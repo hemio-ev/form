@@ -40,15 +40,4 @@ class FieldText extends Abstract_\FormFieldInSingle {
         $this->getControlElement()->setAttribute('required', (boolean) $required);
     }
 
-    /**
-     * 
-     * @return string
-     */
-    public function __toString() {
-        if (!$this->filled)
-            $this->fill();
-
-        return parent::__toString();
-    }
-
 }

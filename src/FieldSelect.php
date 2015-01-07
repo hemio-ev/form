@@ -56,16 +56,4 @@ class FieldSelect extends Abstract_\FormFieldInSingle {
         $this->getControlElement()->addChild(new html\Option($value, new html\String($content)));
     }
 
-    public function __toString() {
-        #  if (isset($this->getInputElement()[$this->getValueToUse()])) {
-        #      $this->getInputElement()[$this->getValueToUse()]->setAttribute('selected',
-        #              true);
-        #  }
-
-        if (!$this->filled)
-            $this->fill();
-
-        return parent::__toString();
-    }
-
 }

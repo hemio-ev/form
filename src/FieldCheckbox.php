@@ -16,10 +16,4 @@ class FieldCheckbox extends Abstract_\FormFieldInSingle {
         $this->init($name, $title, new html\Input($this->getInputType()));
     }
 
-    public function __toString() {
-        $this->fill();
-
-        return parent::__toString();
-    }
-
 }

@@ -57,6 +57,9 @@ class ExamplesTest extends \Helpers {
         $checkbox = new FieldCheckbox('checkbox', _('Checkbox'));
         $section[] = $checkbox;
 
+        $email = new FieldEmail('email');
+        $email->getControlElement()->setAttribute('placeholder', 'user@example.org');
+        $section[] = $email;
 
         $form->arrStoredValues = [
             'input_text' => 'Default Text',
