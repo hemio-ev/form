@@ -31,7 +31,7 @@ class InputTest extends \Helpers {
      */
     public function testNotLazyEnough() {
         $input = new \hemio\form\FieldText('a', 'B');
-        $input->getSingleTemplateClone();
+        $input->getFieldTemplateClone();
     }
 
 }

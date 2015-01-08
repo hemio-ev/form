@@ -4,13 +4,7 @@ namespace hemio\form;
 
 use hemio\html;
 
-class FieldTextarea extends Abstract_\FormFieldInSingle {
-
-    use \hemio\form\Trait_\FormElementSingle;
-
-    public function inputType() {
-        return 'text';
-    }
+class FieldTextarea extends Abstract_\FormFieldDefault {
 
     public function __construct($name, $title) {
         $this->init($name, $title, new html\Textarea($this->inputType()));
@@ -18,10 +12,10 @@ class FieldTextarea extends Abstract_\FormFieldInSingle {
 
     /**
      * 
-     * @return \hemio\form\Abstract_\TemplateFormFieldSingle
+     * @return \hemio\form\Abstract_\TemplateFormField
      */
     public function fill() {
-        $template = $this->getSingleTemplateClone('TEXTAREA');
+        $template = $this->getFieldTemplateClone('TEXTAREA');
 
         $this['_TEMPLATE'] = $template;
         $template->init($this, $this->control);
@@ -29,6 +23,10 @@ class FieldTextarea extends Abstract_\FormFieldInSingle {
         $this->filled = true;
 
         return $template;
+    }
+
+    public function describe() {
+        return 'INPUT(TEXTAREA)';
     }
 
 }

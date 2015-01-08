@@ -22,7 +22,9 @@ class ButtonGroup extends html\Fieldset {
      * @param array $buttons
      */
     public function __construct(array $buttons = []) {
-        $this->addInheritableAppendage('_INPUT_SINGLE_TEMPLATE', new TemplateFormSingle());
+        $this->addInheritableAppendage(
+                FormPost::FORM_FIELD_TEMPLATE, new template\FormPlainControl()
+        );
 
         foreach ($buttons as $button) {
             $this[$button->getName()] = $button;

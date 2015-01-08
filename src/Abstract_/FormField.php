@@ -2,43 +2,25 @@
 
 namespace hemio\form\Abstract_;
 
-use hemio\form\exception;
-
 /**
- * 
+ * Field in a form that expects inputs maybe composed of several input elements.
  */
-abstract class FormField extends \hemio\form\Container {
-
-    protected $name = '';
+abstract class FormField extends FormElement {
 
     /**
-     * Is active value in the form correct.
      * 
-     * @return boolean
+     * @todo not implemented
      */
-    abstract public function dataValid();
+    public function changed() {
+        return false;
+    }
 
     /**
-     * Has the value changed with respective to the stored or default value.
-     * @return boolean
-     */
-    abstract public function changed();
-
-    /**
-     * Get the form to which this element belongs
      * 
-     * @return Abstract_\Form
-     * @throws exception\NotLazyEnough
+     * @todo not implemented
      */
-    public function getForm() {
-        if ($this->existsInheritableAppendage('_FORM'))
-            return $this->getInheritableAppendage('_FORM');
-        else {
-            #print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));
-
-            throw new exception\NotLazyEnough(
-            'No Form for FormElement found. Maybe not yet a child of a Form.');
-        }
+    public function dataValid() {
+        return true;
     }
 
 }

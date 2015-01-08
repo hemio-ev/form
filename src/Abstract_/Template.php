@@ -5,7 +5,7 @@ namespace hemio\form\Abstract_;
 /**
  * Description of Template
  *
- * @author schnack
+ * @author Michael Herold <quabla@hemio.de>
  */
 class Template extends \hemio\form\Container {
     

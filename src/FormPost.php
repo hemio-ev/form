@@ -9,8 +9,8 @@ namespace hemio\form;
  */
 class FormPost extends Abstract_\Form {
 
-    public function __construct($name) {
-        parent::__construct($name);
+    public function __construct($name, array $post = null, array $get = null, array $stored = []) {
+        parent::__construct($name, $post, $get, $stored);
         $this->addChild(new InputHidden($this->getIdentifierName(), ''));
         $this->setAttribute('method', 'post');
     }

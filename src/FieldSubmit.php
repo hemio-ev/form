@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2014 Michael Herold <quabla@hemio.de>
+ * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,42 +17,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\form\Trait_;
-
-use hemio\html;
+namespace hemio\form;
 
 /**
- * Description of FieldSingleInput
+ * Description of FieldSubmit
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-trait SingleInput {
+class FieldSubmit extends Abstract_\FormFieldDefault {
 
-    use FormElementSingle;
-
-    /**
-     * @return string Type value for input element
-     */
-    abstract function getInputType();
-
-    /**
-     * 
-     * @return html\Input
-     */
-    public function getControlElement() {
-        return $this->control;
+    public function __construct($name, $title) {
+        $this->init($name, $title, new \hemio\html\Button());
     }
 
-    /**
-     * 
-     * @return \hemio\form\Abstract_\TemplateFormFieldSingle
-     */
+    public function clicked() {
+        echo 'not implemented';
+    }
+
     public function fill() {
-        $template = $this->getSingleTemplateClone($this->getInputType());
+        $template = $this->getFieldTemplateClone('SUBMIT');
 
         $this['_TEMPLATE'] = $template;
         $template->init($this, $this->control);
-        $this->control->setAttribute('value', $this->getValueToUse());
 
         $this->filled = true;
 

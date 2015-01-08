@@ -5,12 +5,10 @@ namespace hemio\form;
 use hemio\html;
 
 /**
- * @deprecated since version 1.0
- * @todo ButtonSubmit?
+ *
+ * @since 1.0 
  */
-class FieldSelect extends Abstract_\FormFieldInSingle {
-
-    use Trait_\FormElementSingle;
+class FieldSelect extends Abstract_\FormFieldDefault {
 
     /**
      * 
@@ -39,10 +37,10 @@ class FieldSelect extends Abstract_\FormFieldInSingle {
 
     /**
      * 
-     * @return \hemio\form\Abstract_\TemplateFormFieldSingle
+     * @return \hemio\form\Abstract_\TemplateFormField
      */
     public function fill() {
-        $template = $this->getSingleTemplateClone('SELECT');
+        $template = $this->getFieldTemplateClone('SELECT');
 
         $this['_TEMPLATE'] = $template;
         $template->init($this, $this->control);

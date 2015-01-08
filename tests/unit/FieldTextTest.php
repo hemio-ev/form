@@ -20,17 +20,32 @@
 namespace hemio\form;
 
 /**
- * Description of FormPostTest
+ * Description of InputText
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class FormPostTest extends \Helpers {
+class FieldTextTest extends \Helpers {
 
-    public function testHtml() {
-        $form = new FormPost('form-1');
-        $form->addChild(new FieldText('text_input', 'Text input'));
+    public function test1() {
 
-        $this->_assertEqualsXmlFile($form, 'formPost.html');
+        $post = [
+            'form_test_input1' => 'New value'
+        ];
+
+        $stored = [
+            'input1' => 'DB value'
+        ];
+
+        $form = new FormPost('test', $post, null, $stored);
+
+        $input1 = new FieldText('input1', _('Title'));
+        $input1->setDefaultValue('Default value');
+        $form->addChild($input1);
+
+        $this->assertEquals('New value', $input1->getValueToUse(), 'Wrong valueToUse');
+        $this->assertEquals('DB value', $input1->getValueStored(), 'Wrong valueStored');
+        $this->assertEquals('New value', $input1->getValueUser(), 'Wrong valueUser');
+        $this->assertEquals('Default value', $input1->getValueDefault(), 'Wrong valueDefault');
     }
 
 }

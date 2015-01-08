@@ -33,7 +33,14 @@ class ExamplesTest extends \Helpers {
     public function exampleForm() {
         $doc = new \hemio\html\Document(new \hemio\html\String(_('Title')));
 
-        $form = new FormPost('name');
+
+        $stored = [
+            'input_text' => 'Default Text',
+            'input_password' => 'my-secret-password'
+        ];
+
+        $form = new FormPost('name', null, null, $stored);
+
         $body = $doc->getHtml()->getBody();
         $body['form'] = $form;
 
@@ -48,7 +55,7 @@ class ExamplesTest extends \Helpers {
             $select->addOption('value' . $i, _('Value ' . $i));
         $section[] = $select;
 
-        $inputPassword = new FieldPassword('input_password');
+        $inputPassword = new FieldPassword('input_password', _('Password'));
         $section[] = $inputPassword;
 
         $textarea = new FieldTextarea('textarea', _('Long Text'));
@@ -57,14 +64,15 @@ class ExamplesTest extends \Helpers {
         $checkbox = new FieldCheckbox('checkbox', _('Checkbox'));
         $section[] = $checkbox;
 
-        $email = new FieldEmail('email');
+        $email = new FieldEmail('email', _('Email'));
         $email->getControlElement()->setAttribute('placeholder', 'user@example.org');
         $section[] = $email;
 
-        $form->arrStoredValues = [
-            'input_text' => 'Default Text',
-            'input_password' => 'my-secret-password'
-        ];
+        $submit = new FieldSubmit('submit', _('Submit'));
+
+        $buttons = new ButtonGroup([$submit]);
+
+        $section[] = $buttons;
 
         return $doc;
     }
@@ -85,21 +93,36 @@ class ExamplesTest extends \Helpers {
         $template = $form->getSingleControlTemplate();
 
         // patch template for <select> controls
-        $templateSelect = clone $template;
-        $templateSelect['P']['SPAN'] = new \hemio\html\Span();
-        $templateSelect['P']['SPAN']->addCssClass('select');
-        $templateSelect->setPostInitHook(function ($template) {
-            unset($template['P']['CONTROL']);
-            $template['P']['SPAN']['CONTROL'] = $template->control;
-        });
-
-        $form->addInheritableAppendage(FormPost::SINGLE_CONTROL_TEMPLATE . '_SELECT', $templateSelect);
+        $templateSelect = $this->patchTemplateForSelect(clone $template);
+        $form->addInheritableAppendage(
+                FormPost::FORM_FIELD_TEMPLATE . '_SELECT', $templateSelect
+        );
 
         // patch template for <input type=checkbox /> controls
-        $templateSwitch = clone $template;
-        $templateSwitch->setPostInitHook(function ($template) {
-            $template->control->addCssClass('switch');
-            $template['P']->addChildBeginning($template->control);
+        $templateSwitch = $this->patchTemplateForSwitch(clone $template);
+        $form->addInheritableAppendage(
+                FormPost::FORM_FIELD_TEMPLATE . '_CHECKBOX', $templateSwitch
+        );
+
+        $this->_assertEqualsXmlFile($doc, 'examplesAdjustedForm.html');
+    }
+
+    protected function patchTemplateForSelect($templateSelect) {
+        $templateSelect['P']['SPAN'] = new \hemio\html\Span();
+        $templateSelect['P']['SPAN']->addCssClass('select');
+
+        $templateSelect->setPostInitHook(function (Abstract_\TemplateFormField $template) {
+            unset($template['P']['CONTROL']);
+            $template['P']['SPAN']['CONTROL'] = $template->getControl();
+        });
+
+        return $templateSelect;
+    }
+
+    protected function patchTemplateForSwitch($templateSwitch) {
+        $templateSwitch->setPostInitHook(function (Abstract_\TemplateFormField $template) {
+            $template->getControl()->addCssClass('switch');
+            $template['P']->addChildBeginning($template->getControl());
             unset($template['P']['CONTROL']);
 
             $labelText = $template['P']['LABEL'][0];
@@ -111,10 +134,7 @@ class ExamplesTest extends \Helpers {
             $template['P']['LABEL'][] = new \hemio\html\Span();
         });
 
-        $form->addInheritableAppendage(FormPost::SINGLE_CONTROL_TEMPLATE . '_checkbox', $templateSwitch);
-
-
-        $this->_assertEqualsXmlFile($doc, 'examplesAdjustedForm.html');
+        return $templateSwitch;
     }
 
 }

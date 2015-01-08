@@ -10,30 +10,12 @@ use hemio\html\Interface_\Submittable;
  * 
  *
  */
-class FormLineP extends Abstract_\TemplateFormFieldSingle {
-
-    /**
-     *
-     * @var Submittable
-     */
-    public $control;
-
-    /**
-     *
-     * @var Abstract_\FormFieldIn
-     */
-    public $field;
-
-    /**
-     *
-     * @var callable
-     */
-    protected $postInitHook;
+class FormLineP extends Abstract_\TemplateFormField {
 
     public function __construct() {
         $this['P'] = new html\P;
         $this['P']['LABEL'] = new html\Label();
-        $this->setPostInitHook(function ($this) {
+        $this->setPostInitHook(function ($template) {
             
         });
     }
@@ -42,15 +24,14 @@ class FormLineP extends Abstract_\TemplateFormFieldSingle {
         $this->postInitHook = $function;
     }
 
-    public function init(Abstract_\FormFieldIn $field, Submittable $control) {
-        $this->field = $field;
-        $this->control = $control;
+    public function init(Abstract_\FormField $field, Submittable $control) {
+        $this->setField($field);
+        $this->setControl($control);
 
         $this['P']['LABEL']->addChild(__($field->title));
         $this['P']['LABEL']->setAttribute('for', $this->field->getHtmlName());
 
         $control->setAttribute('name', $field->getHtmlName());
-        $control->setAttribute('title', _($field->title));
         $control->setId($field->getHtmlName());
         $this['P']['CONTROL'] = $control;
 

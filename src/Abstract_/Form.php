@@ -25,7 +25,12 @@ abstract class Form extends \hemio\html\Form {
      * @var array
      */
     private $post = [];
-    public $arrStoredValues = [];
+
+    /**
+     *
+     * @var array
+     */
+    protected $storedValues = [];
 
     public function __construct($name, array $post = null, array $get = null, array $stored = []) {
         if ($post === null)
@@ -37,30 +42,31 @@ abstract class Form extends \hemio\html\Form {
         $this->post = $post;
         $this->get = $get;
         $this->name = $name;
+        $this->storedValues = $stored;
 
         $this->setAttribute('name', $this->getHtmlName());
         $this->setId($this->getHtmlName());
-        $this->addInheritableAppendage('_INPUT_SINGLE_TEMPLATE', new template\FormLineP);
+        $this->addInheritableAppendage(self::FORM_FIELD_TEMPLATE, new template\FormLineP);
         $this->addInheritableAppendage('_FORM', $this);
     }
 
     /**
      * @todo potentially completly useless in this functions, form elements should have this options?
-     * @return TemplateFormFieldSingle
+     * @return TemplateFormField
      * @deprecated since version 1.0
      */
     public function getLineTemplate() {
-        return $this->getInheritableAppendage(self::SINGLE_CONTROL_TEMPLATE);
+        return $this->getInheritableAppendage(self::FORM_FIELD_TEMPLATE);
     }
 
     /**
-     * @return TemplateFormFieldSingle
+     * @return TemplateFormField
      */
     public function getSingleControlTemplate() {
-        return $this->getInheritableAppendage(self::SINGLE_CONTROL_TEMPLATE);
+        return $this->getInheritableAppendage(self::FORM_FIELD_TEMPLATE);
     }
-    
-    const SINGLE_CONTROL_TEMPLATE = '_INPUT_SINGLE_TEMPLATE';
+
+    const FORM_FIELD_TEMPLATE = '_INPUT_SINGLE_TEMPLATE';
 
     /**
      * Check for occured errors
@@ -69,7 +75,7 @@ abstract class Form extends \hemio\html\Form {
      */
     public function dataValid() {
         foreach (new \RecursiveIteratorIterator($this) as $child) {
-            if ($child instanceof Abstract_\FormField && !$child->dataValid()) {
+            if ($child instanceof Abstract_\FormElement && !$child->dataValid()) {
                 return false;
             }
         }
@@ -114,8 +120,8 @@ abstract class Form extends \hemio\html\Form {
      * @return mixed
      */
     public function getValueStored($key) {
-        if (isset($this->arrStoredValues[$key])) {
-            return $this->arrStoredValues[$key];
+        if (isset($this->storedValues[$key])) {
+            return $this->storedValues[$key];
         } else {
             return null;
         }

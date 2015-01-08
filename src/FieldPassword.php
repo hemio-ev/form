@@ -2,21 +2,10 @@
 
 namespace hemio\form;
 
-use hemio\html;
-
-class FieldPassword extends Abstract_\FormFieldInSingle {
-
-    use Trait_\SingleInput;
+class FieldPassword extends Abstract_\FormFieldInput {
 
     public function getInputType() {
         return 'password';
-    }
-
-    public function __construct($name, $title = null) {
-        if ($title === null)
-            $title = _('Password');
-
-        $this->init($name, $title, new html\Input($this->getInputType()));
     }
 
     // force the value atribute to null to prevent resending the password to clients
@@ -24,25 +13,8 @@ class FieldPassword extends Abstract_\FormFieldInSingle {
         return '';
     }
 
-    public function getHtmlValue() {
+    public function getValueUser() {
         return '';
-    }
-
-    public function blnDataValid() {
-        if ($this->clsCheckPasswordOk != null) {
-            $clsCheckFunction = $this->clsCheckPasswordOk;
-            $arrCheck = $clsCheckFunction($this->strGetPassword());
-            if (!$arrCheck['result']) {
-                $this->addError($arrCheck['msg']);
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public function setCheckPasswordOkClosure(\Closure $clsCheckPassword) {
-        $this->clsCheckPasswordOk = $clsCheckPassword;
     }
 
 }

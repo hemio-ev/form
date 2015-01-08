@@ -4,16 +4,11 @@ namespace hemio\form;
 
 use hemio\html;
 
-class FieldText extends Abstract_\FormFieldInSingle {
+class FieldText extends Abstract_\FormFieldInput {
 
-    use Trait_\SingleInput;
 
     public function getInputType() {
         return 'text';
-    }
-
-    public function __construct($name, $title) {
-        $this->init($name, $title, new html\Input($this->getInputType()));
     }
 
     /**
@@ -28,7 +23,7 @@ class FieldText extends Abstract_\FormFieldInSingle {
      * 
      * @param boolean $allow
      */
-    public function allowMultiple($allow) {
+    public function setAllowMultiple($allow) {
         $this->getControlElement()->setAttribute('multiple', (boolean) $allow);
     }
 
@@ -36,8 +31,10 @@ class FieldText extends Abstract_\FormFieldInSingle {
      * 
      * @param boolean $required
      */
-    public function isRequired($required) {
+    public function setIsRequired($required) {
         $this->getControlElement()->setAttribute('required', (boolean) $required);
     }
+
+
 
 }
