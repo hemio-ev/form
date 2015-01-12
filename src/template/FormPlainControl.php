@@ -43,8 +43,7 @@ class FormPlainControl extends \hemio\form\Abstract_\TemplateFormField {
         $control->setAttribute('name', $field->getHtmlName());
         $control->setId($field->getHtmlName());
 
-        $this['BUTTON'] = $control;
-        $control['STRING'] = new \hemio\html\String($field->title);
+        $this->addChild($control);
 
         $hook = $this->postInitHook;
         $hook($this);

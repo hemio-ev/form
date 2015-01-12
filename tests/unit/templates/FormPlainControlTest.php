@@ -17,33 +17,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\form;
+namespace hemio\form\template;
 
 /**
- * Description of FieldSubmit
+ * Description of FormPlainControlTest
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class FieldSubmit extends Abstract_\FormFieldDefault {
+class FormPlainControlTest extends \Helpers {
 
-    public function __construct($name, $title) {
-        $this->init($name, $title, new \hemio\html\Button());
-    }
+    public function test1() {
+        $form = new \hemio\form\FormPost('test');
 
-    public function clicked() {
-        echo 'not implemented';
-    }
+        $form->addInheritableAppendage(
+                \hemio\form\FormPost::FORM_FIELD_TEMPLATE, new FormPlainControl()
+        );
 
-    public function fill() {
-        $template = $this->getFieldTemplateClone('SUBMIT');
+        $form->addChild(new \hemio\form\FieldEmail('test1', 'title1'));
 
-        $this['_TEMPLATE'] = $template;
-        $this->control['TEXT'] = new \hemio\html\String($this->title);
-        $template->init($this, $this->control);
-
-        $this->filled = true;
-
-        return $template;
+        $form->__toString();
     }
 
 }
