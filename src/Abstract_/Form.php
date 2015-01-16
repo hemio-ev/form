@@ -74,8 +74,8 @@ abstract class Form extends \hemio\html\Form {
      * @return boolean
      */
     public function dataValid() {
-        foreach (new \RecursiveIteratorIterator($this) as $child) {
-            if ($child instanceof Abstract_\FormElement && !$child->dataValid()) {
+        foreach (new \RecursiveIteratorIterator($this, \RecursiveIteratorIterator::SELF_FIRST) as $child) {
+            if ($child instanceof FormElement && !$child->dataValid()) {
                 return false;
             }
         }

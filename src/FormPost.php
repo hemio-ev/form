@@ -11,16 +11,18 @@ class FormPost extends Abstract_\Form {
 
     public function __construct($name, array $post = null, array $get = null, array $stored = []) {
         parent::__construct($name, $post, $get, $stored);
-        $this->addChild(new InputHidden($this->getIdentifierName(), ''));
+
+        $this['form_identifier'] = new InputHidden($this->getIdentifierName(), '');
+
         $this->setAttribute('method', 'post');
     }
 
     public function submitted() {
-        return $this->getPost($this->getIdentifierName()) !== null;
+        return $this['form_identifier']->getValueUser() !== null;
     }
 
     public function getIdentifierName() {
-        return $this->name . '___form_identifier';
+        return '__form_identifier';
     }
 
     public function correctSubmitted() {

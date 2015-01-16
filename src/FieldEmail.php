@@ -11,7 +11,7 @@ class FieldEmail extends FieldText {
         return 'email';
     }
 
-    public function inputValid() {
+    public function inputValidOld() {
         $strAddress = $this->getValueUser($this->getHtmlName());
 
         $arrExplode = explode('@', $strAddress);

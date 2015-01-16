@@ -13,7 +13,7 @@ class FieldPassword extends Abstract_\FormFieldInput {
         return '';
     }
 
-    public function getValueUser() {
+    public function getValueToUse() {
         return '';
     }
 

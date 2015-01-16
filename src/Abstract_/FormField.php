@@ -17,10 +17,29 @@ abstract class FormField extends FormElement {
 
     /**
      * 
-     * @todo not implemented
      */
     public function dataValid() {
-        return true;
+        $allValid = true;
+        foreach ($this->checks as $key => $check) {
+            $valid = $check($this->getValueUser());
+            $allValid = $allValid && $valid;
+        }
+
+        return $allValid;
+    }
+
+    /**
+     *
+     * @var array[Check]
+     */
+    public $checks = [];
+
+    /**
+     * 
+     * @param Check $check
+     */
+    public function addValidityCheck(\hemio\form\Check $check) {
+        $this->checks[$check->getId()] = $check;
     }
 
 }

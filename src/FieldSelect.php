@@ -50,8 +50,20 @@ class FieldSelect extends Abstract_\FormFieldDefault {
         return $template;
     }
 
-    public function addOption($value, $content) {
-        $this->getControlElement()->addChild(new html\Option($value, new html\String($content)));
+    /**
+     * 
+     * @param mixed $value
+     * @param mixed $content
+     * @return html\Option
+     */
+    public function addOption($value, $content = null) {
+        if ($content === null)
+            $content = $value;
+
+        $option = new html\Option($value, new html\String($content));
+        $this->getControlElement()->addChild($option);
+
+        return $option;
     }
 
 }

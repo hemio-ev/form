@@ -13,7 +13,6 @@ class InputHidden extends Abstract_\FormElement {
         $this->name = $name;
 
         $this['INPUT'] = new html\Input('hidden');
-        $this['INPUT']->setAttribute('type', 'hidden');
         $this['INPUT']->setAttribute('value', $value);
     }
 

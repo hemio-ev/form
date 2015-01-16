@@ -66,8 +66,6 @@ abstract class FormFieldInput extends FormFieldDefault {
         return $template;
     }
 
-
-
     public function describe() {
         return sprint('INPUT(%s)', strtoupper($this->getInputType()));
     }

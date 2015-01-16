@@ -74,14 +74,6 @@ abstract class FormFieldDefault extends FormField {
             return $this->getValueDefault();
     }
 
-    public function getValueUser() {
-        $value = $this->getForm()->getValueUser($this->getHtmlName());
-        if ($value === null)
-            return null;
-        else
-            return $this->getFiltered($value);
-    }
-
     public function getValueStored() {
         return $this->getFiltered(
                         $this->getForm()->getValueStored($this->getName()));
@@ -140,4 +132,10 @@ abstract class FormFieldDefault extends FormField {
     }
 
     abstract public function fill();
+
+    public function setForm(Form $form) {
+        $this->control->setAttribute('form', $form->getHtmlName());
+        $this->addInheritableAppendage('_FORM', $form);
+    }
+
 }

@@ -34,10 +34,9 @@ abstract class FormElement extends \hemio\form\Container {
         if ($this->existsInheritableAppendage('_FORM'))
             return $this->getInheritableAppendage('_FORM');
         else {
-            #print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));
-
             throw new exception\NotLazyEnough(
-            'No Form for FormElement found. Maybe not yet a child of a Form.');
+            'No Form for FormElement found. Maybe not yet a child of a Form.'
+            );
         }
     }
 
@@ -57,6 +56,10 @@ abstract class FormElement extends \hemio\form\Container {
     public function getHtmlName(array $extraKeys = []) {
         return $this->getForm()->getHtmlName() .
                 '_' . $this->getName() . implode('_', $extraKeys);
+    }
+
+    public function getValueUser() {
+        return $this->getForm()->getValueUser($this->getHtmlName());
     }
 
 }
