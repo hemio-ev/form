@@ -8,6 +8,12 @@ namespace hemio\form\Abstract_;
 abstract class FormField extends FormElement {
 
     /**
+     *
+     * @var boolean
+     */
+    protected $required = false;
+
+    /**
      * 
      * @todo not implemented
      */
@@ -19,13 +25,19 @@ abstract class FormField extends FormElement {
      * 
      */
     public function dataValid() {
-        $allValid = true;
-        foreach ($this->checks as $key => $check) {
-            $valid = $check($this->getValueUser());
-            $allValid = $allValid && $valid;
-        }
+        if (!strlen($this->getValueUser()) && !$this->required) {
+            // don't apply checks, if empty and not required
+            return true;
+        } else {
+            $allValid = true;
 
-        return $allValid;
+            foreach ($this->checks as $key => $check) {
+                $valid = $check($this->getValueUser());
+                $allValid = $allValid && $valid;
+            }
+
+            return $allValid;
+        }
     }
 
     /**

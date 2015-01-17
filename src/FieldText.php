@@ -31,6 +31,8 @@ class FieldText extends Abstract_\FormFieldInput {
      * @param boolean $required
      */
     public function setRequired($required = true) {
+        $this->addValidityCheck(new CheckMinLength(1));
+        $this->required = $required;
         $this->getControlElement()->setAttribute('required', (boolean) $required);
     }
 

@@ -3,6 +3,7 @@
 namespace hemio\form;
 
 use hemio\html;
+use \RecursiveIteratorIterator as RecursIter;
 
 /**
  *
@@ -40,6 +41,13 @@ class FieldSelect extends Abstract_\FormFieldDefault {
      * @return \hemio\form\Abstract_\TemplateFormField
      */
     public function fill() {
+        foreach (new RecursIter($this->getControlElement(), RecursIter::SELF_FIRST) as $option)
+            if (
+                    $option instanceof html\Option &&
+                    $option->getAttribute('value') == $this->getValueToUse()
+            )
+                $option->setAttribute('selected', true);
+
         $template = $this->getFieldTemplateClone('SELECT');
 
         $this['_TEMPLATE'] = $template;

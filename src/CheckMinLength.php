@@ -28,9 +28,11 @@ class CheckMinLength extends Check {
 
     protected $minLength;
 
-    public function __construct($maxLength) {
-        $this->minLength = $maxLength;
+    public function __construct($minLength) {
+        $this->minLength = $minLength;
         $this->check = $this;
+        $this->id = 'min_length';
+        $this->message = 'min length is ' . $minLength;
     }
 
     public function __invoke($value) {

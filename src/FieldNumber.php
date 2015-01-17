@@ -20,23 +20,14 @@
 namespace hemio\form;
 
 /**
- * Description of CheckLength
+ * Description of FieldNumber
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class CheckMaxLength extends Check {
+class FieldNumber extends \hemio\form\FieldText {
 
-    protected $maxLength;
-
-    public function __construct($maxLength) {
-        $this->maxLength = $maxLength;
-        $this->check = $this;
-        $this->id = 'max_length';
-        $this->message = 'max length is ' . $maxLength;
-    }
-
-    public function __invoke($value) {
-        return strlen($value) <= $this->maxLength;
+    public function getInputType() {
+        return 'number';
     }
 
 }

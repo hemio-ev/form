@@ -20,23 +20,26 @@
 namespace hemio\form;
 
 /**
- * Description of CheckLength
+ * Description of CheckEmail
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class CheckMaxLength extends Check {
+class CheckEmail extends Check {
 
-    protected $maxLength;
-
-    public function __construct($maxLength) {
-        $this->maxLength = $maxLength;
+    public function __construct($multiple = false) {
         $this->check = $this;
-        $this->id = 'max_length';
-        $this->message = 'max length is ' . $maxLength;
+        $this->id = 'email';
+        $this->message = 'no valid email';
     }
 
-    public function __invoke($value) {
-        return strlen($value) <= $this->maxLength;
+    public function __invoke($email) {
+        $exploded = explode('@', $email);
+        $exploded[] = idn_to_ascii(array_pop($exploded));
+        $addressAscii = implode('@', $exploded);
+
+        $valid = filter_var($addressAscii, FILTER_VALIDATE_EMAIL) !== false;
+
+        return $valid;
     }
 
 }
