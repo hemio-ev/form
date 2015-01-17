@@ -29,4 +29,14 @@ class FieldTextarea extends Abstract_\FormFieldDefault {
         return 'INPUT(TEXTAREA)';
     }
 
+    /**
+     * 
+     * @param boolean $required
+     */
+    public function setRequired($required = true) {
+        $this->addValidityCheck(new CheckMinLength(1));
+        $this->required = $required;
+        $this->control->setAttribute('required', (boolean) $required);
+    }
+
 }
