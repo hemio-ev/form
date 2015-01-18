@@ -8,7 +8,7 @@ namespace hemio\form;
 class FieldEmail extends FieldText {
 
     public function getInputType() {
-        return 'text';
+        return 'email';
     }
 
     public function __construct($name, $title) {
