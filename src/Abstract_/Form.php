@@ -51,6 +51,14 @@ abstract class Form extends \hemio\html\Form {
     }
 
     /**
+     * 
+     * @param array $storedValues
+     */
+    public function setStoredValues(array $storedValues) {
+        $this->storedValues = $storedValues;
+    }
+
+    /**
      * @todo potentially completly useless in this functions, form elements should have this options?
      * @return TemplateFormField
      * @deprecated since version 1.0
