@@ -26,10 +26,26 @@ namespace hemio\form;
  */
 class CheckCustom extends Check {
 
+    /**
+     *
+     * @var callable
+     */
+    protected $check;
+
     public function __construct($id, callable $check, $message = null) {
         $this->id = $id;
         $this->check = $check;
         $this->message = $message;
+    }
+
+    /**
+     * 
+     * @param mixed $value
+     * @return boolean
+     */
+    public function __invoke($value) {
+        $check = $this->check;
+        return $check($value);
     }
 
 }

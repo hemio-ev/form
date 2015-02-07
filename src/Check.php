@@ -34,12 +34,6 @@ abstract class Check {
 
     /**
      *
-     * @var callable
-     */
-    protected $check;
-
-    /**
-     *
      * @var string
      */
     protected $message;
@@ -57,16 +51,6 @@ abstract class Check {
      */
     public function getMessage() {
         return $this->message;
-    }
-
-    /**
-     * 
-     * @param mixed $value
-     * @return boolean
-     */
-    public function check($value) {
-        $check = $this->check;
-        return $check($value);
     }
 
 }

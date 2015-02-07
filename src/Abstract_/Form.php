@@ -141,4 +141,14 @@ abstract class Form extends \hemio\html\Form {
      * @since 1.0
      */
     abstract public function getValueUser($key);
+
+    public function __toString() {
+
+        $filter = function ($child) {
+            return $child instanceof FormFieldFocusable;
+        };
+        #$this->getRecursiveIterator($filter)->;
+        return parent::__toString();
+    }
+
 }
