@@ -67,7 +67,7 @@ abstract class FormFieldInput extends FormFieldDefault {
     }
 
     public function describe() {
-        return sprint('INPUT(%s)', strtoupper($this->getInputType()));
+        return sprintf('INPUT(%s)', strtoupper($this->getInputType()));
     }
 
 }

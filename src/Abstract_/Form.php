@@ -48,6 +48,12 @@ abstract class Form extends \hemio\html\Form {
         $this->setId($this->getHtmlName());
         $this->addInheritableAppendage(self::FORM_FIELD_TEMPLATE, new template\FormLineP);
         $this->addInheritableAppendage('_FORM', $this);
+
+        $this['_LOGICAL_CHILDS'] = new \hemio\form\ContainerHiding();
+    }
+
+    public function addLogicalChild(FormElement $element) {
+        $this['_LOGICAL_CHILDS']->addChild($element);
     }
 
     /**

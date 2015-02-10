@@ -136,6 +136,7 @@ abstract class FormFieldDefault extends FormField {
     public function setForm(Form $form) {
         $this->control->setAttribute('form', $form->getHtmlName());
         $this->addInheritableAppendage('_FORM', $form);
+        $form->addLogicalChild($this);
     }
 
 }
