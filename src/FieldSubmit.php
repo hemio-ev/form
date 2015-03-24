@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -24,26 +23,30 @@ namespace hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class FieldSubmit extends Abstract_\FormFieldDefault {
+class FieldSubmit extends Abstract_\FormFieldDefault
+{
 
-    public function __construct($name, $title) {
+    public function __construct($name, $title)
+    {
         $this->init($name, $title, new \hemio\html\Button());
+        $this->setAutofocus(true, 3);
     }
 
-    public function clicked() {
-        echo 'not implemented';
+    public function clicked()
+    {
+        return $this->getValueUser() !== null;
     }
 
-    public function fill() {
+    public function fill()
+    {
         $template = $this->getFieldTemplateClone('SUBMIT');
 
-        $this['_TEMPLATE'] = $template;
-        $this->control['TEXT'] = new \hemio\html\String($this->title);
+        $this['_TEMPLATE']     = $template;
+        $this->control['TEXT'] = $this->getHtmlTitle();
         $template->init($this, $this->control);
 
         $this->filled = true;
 
         return $template;
     }
-
 }

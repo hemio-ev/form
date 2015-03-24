@@ -5,15 +5,15 @@ namespace hemio\form\Abstract_;
 use hemio\form\exception;
 
 /**
- * 
+ *
  */
-abstract class FormElement extends \hemio\form\Container {
-
+abstract class FormElement extends \hemio\form\Container
+{
     protected $name = '';
 
     /**
      * Is active value in the form correct.
-     * 
+     *
      * @return boolean
      */
     abstract public function dataValid();
@@ -26,11 +26,12 @@ abstract class FormElement extends \hemio\form\Container {
 
     /**
      * Get the form to which this element belongs
-     * 
+     *
      * @return Abstract_\Form
      * @throws exception\NotLazyEnough
      */
-    public function getForm() {
+    public function getForm()
+    {
         if ($this->existsInheritableAppendage('_FORM'))
             return $this->getInheritableAppendage('_FORM');
         else {
@@ -41,25 +42,30 @@ abstract class FormElement extends \hemio\form\Container {
     }
 
     /**
-     * 
+     *
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
-     * 
+     *
      * @param array $extraKeys
      * @return string
      */
-    public function getHtmlName(array $extraKeys = []) {
-        return $this->getForm()->getHtmlName() .
-                '_' . $this->getName() . implode('_', $extraKeys);
+    public function getHtmlName(array $extraKeys = [])
+    {
+        return sprintf('%s_%s%s'
+            , $this->getForm()->getHtmlName()
+            , $this->getName()
+            , implode('_', $extraKeys)
+        );
     }
 
-    public function getValueUser() {
+    public function getValueUser()
+    {
         return $this->getForm()->getValueUser($this->getHtmlName());
     }
-
 }

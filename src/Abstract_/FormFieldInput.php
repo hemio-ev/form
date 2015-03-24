@@ -44,14 +44,6 @@ abstract class FormFieldInput extends FormFieldDefault {
 
     /**
      * 
-     * @return html\Input
-     */
-    public function getControlElement() {
-        return $this->control;
-    }
-
-    /**
-     * 
      * @return \hemio\form\Abstract_\TemplateFormField
      */
     public function fill() {

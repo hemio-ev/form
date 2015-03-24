@@ -4,10 +4,10 @@ namespace hemio\form\Abstract_;
 
 use hemio\form\template;
 
-abstract class Form extends \hemio\html\Form {
+abstract class Form extends \hemio\html\Form
+{
 
     use \hemio\form\Trait_\MaintainsHtmlL10n;
-
     /**
      *
      * @var string
@@ -32,35 +32,42 @@ abstract class Form extends \hemio\html\Form {
      */
     protected $storedValues = [];
 
-    public function __construct($name, array $post = null, array $get = null, array $stored = []) {
+    public function __construct($name, array $post = null, array $get = null,
+                                array $stored = [])
+    {
         if ($post === null)
             $post = $_POST;
 
         if ($get === null)
             $get = $_GET;
 
-        $this->post = $post;
-        $this->get = $get;
-        $this->name = $name;
+        $this->post         = $post;
+        $this->get          = $get;
+        $this->name         = $name;
         $this->storedValues = $stored;
 
         $this->setAttribute('name', $this->getHtmlName());
         $this->setId($this->getHtmlName());
-        $this->addInheritableAppendage(self::FORM_FIELD_TEMPLATE, new template\FormLineP);
+        $this->addInheritableAppendage(self::FORM_FIELD_TEMPLATE,
+                                       new template\FormLineP);
         $this->addInheritableAppendage('_FORM', $this);
 
         $this['_LOGICAL_CHILDS'] = new \hemio\form\ContainerHiding();
+
+        $form = $this;
     }
 
-    public function addLogicalChild(FormElement $element) {
+    public function addLogicalChild(FormElement $element)
+    {
         $this['_LOGICAL_CHILDS']->addChild($element);
     }
 
     /**
-     * 
+     *
      * @param array $storedValues
      */
-    public function setStoredValues(array $storedValues) {
+    public function setStoredValues(array $storedValues)
+    {
         $this->storedValues = $storedValues;
     }
 
@@ -69,26 +76,29 @@ abstract class Form extends \hemio\html\Form {
      * @return TemplateFormField
      * @deprecated since version 1.0
      */
-    public function getLineTemplate() {
+    public function getLineTemplate()
+    {
         return $this->getInheritableAppendage(self::FORM_FIELD_TEMPLATE);
     }
 
     /**
      * @return TemplateFormField
      */
-    public function getSingleControlTemplate() {
+    public function getSingleControlTemplate()
+    {
         return $this->getInheritableAppendage(self::FORM_FIELD_TEMPLATE);
     }
-
     const FORM_FIELD_TEMPLATE = '_INPUT_SINGLE_TEMPLATE';
 
     /**
      * Check for occured errors
-     * 
+     *
      * @return boolean
      */
-    public function dataValid() {
-        foreach (new \RecursiveIteratorIterator($this, \RecursiveIteratorIterator::SELF_FIRST) as $child) {
+    public function dataValid()
+    {
+        foreach (new \RecursiveIteratorIterator($this,
+                                                \RecursiveIteratorIterator::SELF_FIRST) as $child) {
             if ($child instanceof FormElement && !$child->dataValid()) {
                 return false;
             }
@@ -98,27 +108,30 @@ abstract class Form extends \hemio\html\Form {
     }
 
     /**
-     * 
+     *
      * @return string
      */
-    public function getHtmlName() {
-        return 'form_' . $this->name;
+    public function getHtmlName()
+    {
+        return 'form_'.$this->name;
     }
 
     /**
-     * 
+     *
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
-     * 
+     *
      * @param string $key
      * @return null|string
      */
-    public function getPost($key) {
+    public function getPost($key)
+    {
         if (isset($this->post[$key])) {
             return $this->post[$key];
         } else {
@@ -127,13 +140,28 @@ abstract class Form extends \hemio\html\Form {
     }
 
     /**
+     *
+     * @param string $key
+     * @return null|string
+     */
+    public function getGet($key)
+    {
+        if (isset($this->get[$key])) {
+            return $this->get[$key];
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * Stored values like from DB?
-     * 
+     *
      * @todo unclear
      * @param string $key
      * @return mixed
      */
-    public function getValueStored($key) {
+    public function getValueStored($key)
+    {
         if (isset($this->storedValues[$key])) {
             return $this->storedValues[$key];
         } else {
@@ -143,18 +171,14 @@ abstract class Form extends \hemio\html\Form {
 
     /**
      * Get value from GET or POST
-     * 
+     *
      * @since 1.0
      */
     abstract public function getValueUser($key);
 
-    public function __toString() {
+    public function __toString()
+    {
 
-        $filter = function ($child) {
-            return $child instanceof FormFieldFocusable;
-        };
-        #$this->getRecursiveIterator($filter)->;
         return parent::__toString();
     }
-
 }

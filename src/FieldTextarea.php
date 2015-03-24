@@ -4,39 +4,44 @@ namespace hemio\form;
 
 use hemio\html;
 
-class FieldTextarea extends Abstract_\FormFieldDefault {
+class FieldTextarea extends Abstract_\FormFieldDefault
+{
 
-    public function __construct($name, $title) {
+    public function __construct($name, $title)
+    {
         $this->init($name, $title, new html\Textarea($this->inputType()));
     }
 
     /**
-     * 
+     *
      * @return \hemio\form\Abstract_\TemplateFormField
      */
-    public function fill() {
+    public function fill()
+    {
         $template = $this->getFieldTemplateClone('TEXTAREA');
 
         $this['_TEMPLATE'] = $template;
         $template->init($this, $this->control);
+        $this->control->addChild(new html\String($this->getValueToUse()));
 
         $this->filled = true;
 
         return $template;
     }
 
-    public function describe() {
+    public function describe()
+    {
         return 'INPUT(TEXTAREA)';
     }
 
     /**
-     * 
+     *
      * @param boolean $required
      */
-    public function setRequired($required = true) {
+    public function setRequired($required = true)
+    {
         $this->addValidityCheck(new CheckMinLength(1));
         $this->required = $required;
         $this->control->setAttribute('required', (boolean) $required);
     }
-
 }

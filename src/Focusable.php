@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -19,40 +18,12 @@
 
 namespace hemio\form;
 
-/**
- * Description of ValidityCheck
- *
- * @author Michael Herold <quabla@hemio.de>
- */
-abstract class Check {
+interface Focusable
+{
 
-    /**
-     *
-     * @var string
-     */
-    protected $id;
+    public function setAutofocus($focus = true, $level = 10);
 
-    /**
-     *
-     * @var string
-     */
-    protected $message;
+    public function engageAutofocus();
 
-    /**
-     * @return string Id
-     */
-    public function getId() {
-        return $this->id;
-    }
-
-    /**
-     * 
-     * @return string
-     */
-    public function getMessage() {
-        return $this->message;
-    }
-    
-    abstract public function __invoke($value);
-
+    public function getAutofocusLevel();
 }

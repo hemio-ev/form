@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -17,32 +16,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\form\Abstract_;
+namespace hemio\form;
 
 /**
- * Description of FormFieldFocusable
+ * Description of CheckEmail
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-trait FormFieldFocusable {
+class CheckTel extends Check
+{
 
-    /**
-     *
-     * @var integer
-     */
-    protected $focusCardinality;
-
-    /**
-     * 
-     * @return integer
-     */
-    public function getFocusCardinality() {
-        return $this->focusCardinality;
+    public function __construct($multiple = false)
+    {
+        $this->check   = $this;
+        $this->id      = 'tel';
+        $this->message = _('Not a valid phone number (format +<country>-<prefix>-<number>)');
     }
 
-    public function setAutofocus($autofocus = true, $cardinality = 0) {
-        $this->focusCardinality = $cardinality;
-        $this->getControlElement()->setAttribute('autofocus', (boolean) $autofocus);
+    public function __invoke($tel)
+    {
+        return preg_match('/^\+\d{1,4}-\d+-\d+$/', $tel);
     }
-
 }
