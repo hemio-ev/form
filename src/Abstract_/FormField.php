@@ -15,12 +15,8 @@ abstract class FormField extends FormElement
 
     /**
      *
-     * @todo not implemented
+     * @var array[string]
      */
-    public function changed()
-    {
-        return false;
-    }
     protected $errors = [];
 
     /**

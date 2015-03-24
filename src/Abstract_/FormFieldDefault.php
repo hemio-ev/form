@@ -95,11 +95,6 @@ abstract class FormFieldDefault extends FormField implements form_\Focusable
                 $this->getForm()->getValueStored($this->getName()));
     }
 
-    public function changed()
-    {
-        return $this->getValueStored() != $this->getValueUser();
-    }
-
     /**
      *
      * @return TemplateFormField

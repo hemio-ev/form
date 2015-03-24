@@ -6,8 +6,6 @@ use hemio\form\template;
 
 abstract class Form extends \hemio\html\Form
 {
-
-    use \hemio\form\Trait_\MaintainsHtmlL10n;
     /**
      *
      * @var string
@@ -53,8 +51,6 @@ abstract class Form extends \hemio\html\Form
         $this->addInheritableAppendage('_FORM', $this);
 
         $this['_LOGICAL_CHILDS'] = new \hemio\form\ContainerHiding();
-
-        $form = $this;
     }
 
     public function addLogicalChild(FormElement $element)
@@ -69,16 +65,6 @@ abstract class Form extends \hemio\html\Form
     public function setStoredValues(array $storedValues)
     {
         $this->storedValues = $storedValues;
-    }
-
-    /**
-     * @todo potentially completly useless in this functions, form elements should have this options?
-     * @return TemplateFormField
-     * @deprecated since version 1.0
-     */
-    public function getLineTemplate()
-    {
-        return $this->getInheritableAppendage(self::FORM_FIELD_TEMPLATE);
     }
 
     /**
@@ -154,9 +140,8 @@ abstract class Form extends \hemio\html\Form
     }
 
     /**
-     * Stored values like from DB?
+     * Stored values like from database
      *
-     * @todo unclear
      * @param string $key
      * @return mixed
      */

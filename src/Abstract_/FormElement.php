@@ -19,12 +19,6 @@ abstract class FormElement extends \hemio\form\Container
     abstract public function dataValid();
 
     /**
-     * Has the value changed with respective to the stored or default value.
-     * @return boolean
-     */
-    abstract public function changed();
-
-    /**
      * Get the form to which this element belongs
      *
      * @return Abstract_\Form
