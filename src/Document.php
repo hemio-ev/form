@@ -31,7 +31,7 @@ class Document extends \hemio\html\Document
         parent::__construct($objTitleContent);
 
         $this->addHookToString(
-            function ($elem) {
+            function (\hemio\html\Interface_\HtmlCode $elem) {
             $filter = function ($elem) {
                 return $elem instanceof \hemio\form\Focusable;
             };
