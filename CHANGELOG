@@ -1,3 +1,5 @@
+v0.2.1
+  - Fixes composer dependencies on 'dev-master' versions
 v0.2.0
   - First realease used in production
   - Adds GPL LICENSE file
