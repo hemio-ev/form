@@ -76,7 +76,7 @@ abstract class FormFieldDefault extends FormField implements form_\Focusable
         $this->title   = $title;
         $this->control = $control;
         if (strlen($title) > 0)
-            $this->setAccessKey($title[0]);
+            $this->setAccessKey(mb_substr($title, 0, 1));
     }
 
     public function getValueToUse()
@@ -167,7 +167,7 @@ abstract class FormFieldDefault extends FormField implements form_\Focusable
             return new html\String($this->title);
         } else {
             $matches = [];
-            if (preg_match('/^(.*?)('.$accessKey.')(.*)$/i', $this->title,
+            if (preg_match('/^(.*?)('.$accessKey.')(.*)$/iu', $this->title,
                            $matches)) {
                 $container = new form_\Container;
 
