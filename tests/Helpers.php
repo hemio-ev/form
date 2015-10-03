@@ -53,7 +53,7 @@ class Helpers extends PHPUnit_Framework_TestCase {
     }
 
     public static function getDocumentBody() {
-        return (new hemio\html\Document(new hemio\html\String('Title')))->getHtml()->getBody();
+        return (new hemio\html\Document(new hemio\html\Str('Title')))->getHtml()->getBody();
     }
 
 }

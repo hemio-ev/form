@@ -22,7 +22,7 @@ class FieldTextarea extends Abstract_\FormFieldDefault
 
         $this['_TEMPLATE'] = $template;
         $template->init($this, $this->control);
-        $this->control->addChild(new html\String($this->getValueToUse()));
+        $this->control->addChild(new html\Str($this->getValueToUse()));
 
         $this->filled = true;
 

@@ -31,7 +31,7 @@ class ExamplesTest extends \Helpers {
      * @return \hemio\html\Document
      */
     public function exampleForm() {
-        $doc = new \hemio\html\Document(new \hemio\html\String(_('Title')));
+        $doc = new \hemio\html\Document(new \hemio\html\Str(_('Title')));
 
 
         $stored = [

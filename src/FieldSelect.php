@@ -68,7 +68,7 @@ class FieldSelect extends Abstract_\FormFieldDefault {
         if ($content === null)
             $content = $value;
 
-        $option = new html\Option($value, new html\String($content));
+        $option = new html\Option($value, new html\Str($content));
         $this->getControlElement()->addChild($option);
 
         return $option;

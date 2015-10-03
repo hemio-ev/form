@@ -164,7 +164,7 @@ abstract class FormFieldDefault extends FormField implements form_\Focusable
     {
         $accessKey = $this->getControlElement()->getAttribute('accesskey');
         if (strlen($accessKey) !== 1) {
-            return new html\String($this->title);
+            return new html\Str($this->title);
         } else {
             $matches = [];
             if (preg_match('/^(.*?)('.$accessKey.')(.*)$/iu', $this->title,
@@ -172,23 +172,23 @@ abstract class FormFieldDefault extends FormField implements form_\Focusable
                 $container = new form_\Container;
 
                 $u = new html\U();
-                $u->addChild(new html\String($matches[2]));
+                $u->addChild(new html\Str($matches[2]));
 
-                $container->addChild(new html\String($matches[1]));
+                $container->addChild(new html\Str($matches[1]));
                 $container->addChild($u);
-                $container->addChild(new html\String($matches[3]));
+                $container->addChild(new html\Str($matches[3]));
 
                 return $container;
             } else {
                 $container = new form_\Container;
-                $container->addChild(new html\String($this->title.' ('));
+                $container->addChild(new html\Str($this->title.' ('));
 
                 $u = new html\U();
-                $u->addChild(new html\String($accessKey));
+                $u->addChild(new html\Str($accessKey));
 
                 $container->addChild($u);
 
-                $container->addChild(new html\String(')'));
+                $container->addChild(new html\Str(')'));
 
                 return $container;
             }

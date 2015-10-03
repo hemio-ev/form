@@ -1,3 +1,5 @@
+v0.3.0-unreleased
+  - Updates dependency hemio\html v0.2
 v0.2.1
   - Fixes composer dependencies on 'dev-master' versions
 v0.2.0
