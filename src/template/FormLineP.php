@@ -33,10 +33,10 @@ class FormLineP extends Abstract_\TemplateFormField
         $this->setControl($control);
 
         $this['P']['LABEL']->addChild($field->getHtmlTitle());
-        $this['P']['LABEL']->setAttribute('for', $this->field->getHtmlName());
+        $this['P']['LABEL']->setAttribute('for', $this->field->getHtmlId());
 
         $control->setAttribute('name', $field->getHtmlName());
-        $control->setId($field->getHtmlName());
+        $control->setId($field->getHtmlId());
         $this['P']['CONTROL'] = $control;
 
         $hook = $this->postInitHook;

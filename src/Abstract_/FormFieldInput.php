@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2014 Michael Herold <quabla@hemio.de>
  *
@@ -26,7 +25,8 @@ use hemio\html;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-abstract class FormFieldInput extends FormFieldDefault {
+abstract class FormFieldInput extends FormFieldDefault
+{
 
     /**
      * @return string Type value for input element
@@ -34,19 +34,22 @@ abstract class FormFieldInput extends FormFieldDefault {
     abstract function getInputType();
 
     /**
-     * 
+     *
      * @param string $name
      * @param string $title
      */
-    public function __construct($name, $title) {
-        $this->init($name, $title, new html\Input($this->getInputType()));
+    public function __construct($name, $title, $idSuffix = null)
+    {
+        $this->init($name, $title, new html\Input($this->getInputType()),
+                                                  $idSuffix);
     }
 
     /**
-     * 
+     *
      * @return \hemio\form\Abstract_\TemplateFormField
      */
-    public function fill() {
+    public function fill()
+    {
         $template = $this->getFieldTemplateClone(strtoupper($this->getInputType()));
 
         $this['_TEMPLATE'] = $template;
@@ -58,8 +61,8 @@ abstract class FormFieldInput extends FormFieldDefault {
         return $template;
     }
 
-    public function describe() {
+    public function describe()
+    {
         return sprintf('INPUT(%s)', strtoupper($this->getInputType()));
     }
-
 }

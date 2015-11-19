@@ -9,7 +9,8 @@ use hemio\form\exception;
  */
 abstract class FormElement extends \hemio\form\Container
 {
-    protected $name = '';
+    protected $name     = '';
+    protected $idSuffix = null;
 
     /**
      * Is active value in the form correct.
@@ -54,6 +55,21 @@ abstract class FormElement extends \hemio\form\Container
         return sprintf('%s_%s%s'
             , $this->getForm()->getHtmlName()
             , $this->getName()
+            , implode('_', $extraKeys)
+        );
+    }
+
+    /**
+     *
+     * @param array $extraKeys
+     * @return string
+     */
+    public function getHtmlId(array $extraKeys = [])
+    {
+        return sprintf('%s_%s%s'
+            , $this->getForm()->getHtmlName()
+            , $this->getName()
+            , $this->idSuffix === null ? '' : '_'.$this->idSuffix
             , implode('_', $extraKeys)
         );
     }

@@ -1,3 +1,6 @@
+v0.4.0
+  - Adds support for input type radio
+  - Adds support for ids deviating from name
 v0.3.0
   - Updates dependency hemio\html v0.2
 v0.2.1

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -27,26 +26,28 @@ use hemio\html\Interface_\Submittable;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class FormPlainControl extends \hemio\form\Abstract_\TemplateFormField {
+class FormPlainControl extends \hemio\form\Abstract_\TemplateFormField
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->setPostInitHook(function ($this) {
-            
+
         });
     }
 
-    public function init(Abstract_\FormField $field, Submittable $control) {
+    public function init(Abstract_\FormField $field, Submittable $control)
+    {
         $this->setControl($control);
         $this->setField($field);
 
         $control->setAttribute('title', $field->title);
         $control->setAttribute('name', $field->getHtmlName());
-        $control->setId($field->getHtmlName());
+        $control->setId($field->getHtmlId());
 
         $this->addChild($control);
 
         $hook = $this->postInitHook;
         $hook($this);
     }
-
 }

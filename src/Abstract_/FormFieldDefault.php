@@ -70,11 +70,12 @@ abstract class FormFieldDefault extends FormField implements form_\Focusable
      * @param string $title
      * @param html\Interface_\Submittable $control
      */
-    public function init($name, $title, $control)
+    public function init($name, $title, $control, $idSuffix = null)
     {
-        $this->name    = $name;
-        $this->title   = $title;
-        $this->control = $control;
+        $this->name     = $name;
+        $this->title    = $title;
+        $this->control  = $control;
+        $this->idSuffix = $idSuffix;
         if (strlen($title) > 0)
             $this->setAccessKey(mb_substr($title, 0, 1));
     }
