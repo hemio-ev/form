@@ -1,6 +1,7 @@
 <?php
+
 /*
- * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+ * Copyright (C) 2015-2016 Michael Herold <quabla@hemio.de>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,22 +27,21 @@ use hemio\html\Interface_\Submittable;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class FormPlainControl extends \hemio\form\Abstract_\TemplateFormField
-{
+class FormPlainControl extends \hemio\form\Abstract_\TemplateFormField {
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->setPostInitHook(function ($null) {
-
+            return;
         });
     }
 
-    public function init(Abstract_\FormField $field, Submittable $control)
-    {
+    public function init(Abstract_\FormField $field, Submittable $control) {
         $this->setControl($control);
         $this->setField($field);
 
-        $control->setAttribute('title', $field->title);
+        if (!$control->getAttribute('title'))
+            $control->setAttribute('title', $field->title);
+
         $control->setAttribute('name', $field->getHtmlName());
         $control->setId($field->getHtmlId());
 
@@ -50,4 +50,5 @@ class FormPlainControl extends \hemio\form\Abstract_\TemplateFormField
         $hook = $this->postInitHook;
         $hook($this);
     }
+
 }
