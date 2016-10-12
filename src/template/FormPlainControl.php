@@ -31,7 +31,7 @@ class FormPlainControl extends \hemio\form\Abstract_\TemplateFormField
 
     public function __construct()
     {
-        $this->setPostInitHook(function ($this) {
+        $this->setPostInitHook(function ($null) {
 
         });
     }
