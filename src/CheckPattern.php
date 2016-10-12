@@ -45,7 +45,7 @@ class CheckPattern extends Check {
     }
 
     public function __invoke($value) {
-        return preg_match($pattern, $subject) === 1;
+        return preg_match($this->pattern, $subject) === 1;
     }
 
 }
