@@ -32,7 +32,7 @@ class CheckMinLength extends Check {
         $this->minLength = $minLength;
         $this->check = $this;
         $this->id = 'min_length';
-        $this->message = 'min length is ' . $minLength;
+        $this->message = 'The minimal length of ' . $minLength . ' is not reached.';
     }
 
     public function __invoke($value) {

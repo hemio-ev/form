@@ -29,7 +29,7 @@ class CheckEmail extends Check {
     public function __construct($multiple = false) {
         $this->check = $this;
         $this->id = 'email';
-        $this->message = 'no valid email';
+        $this->message = _('Not a valid email address');
     }
 
     public function __invoke($email) {

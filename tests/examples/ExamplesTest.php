@@ -68,6 +68,10 @@ class ExamplesTest extends \Helpers {
         $email->getControlElement()->setAttribute('placeholder', 'user@example.org');
         $section[] = $email;
 
+        $textWithPattern = new FieldText('text_with_pattern', 'Follow the pattern');
+        $textWithPattern->setPattern('[aAbB]+', _('Give some "A"s or "B"s'));
+        $section[] = $textWithPattern;
+
         $submit = new FieldSubmit('submit', _('Submit'));
 
         $buttons = new ButtonGroup([$submit]);

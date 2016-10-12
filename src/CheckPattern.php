@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+ * Copyright (C) 2016 Michael Herold <quabla@hemio.de>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,23 +20,32 @@
 namespace hemio\form;
 
 /**
- * Description of CheckLength
+ * Check against a HTML5 form pattern
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class CheckMaxLength extends Check {
+class CheckPattern extends Check {
 
-    protected $maxLength;
+    protected $pattern;
 
-    public function __construct($maxLength) {
-        $this->maxLength = $maxLength;
+    /**
+     * 
+     * @param type $id 
+     * @param type $pattern Regex pattern without anchors (example: [a-z]+)
+     * @param type $message
+     */
+    public function __construct($id, $pattern, $message = null) {
+        $this->pattern = '/^' . $pattern . '$/';
         $this->check = $this;
-        $this->id = 'max_length';
-        $this->message = 'The maximal length of ' . $maxLength . ' is exceeded.';
+        $this->id = $id;
+        $this->message = $message;
+
+        if (!is_int(preg_match($this->pattern, '')))
+            throw new \Exception('Invalid pattern ' . $pattern . ' for check ' . $id);
     }
 
     public function __invoke($value) {
-        return strlen($value) <= $this->maxLength;
+        return preg_match($pattern, $subject);
     }
 
 }
