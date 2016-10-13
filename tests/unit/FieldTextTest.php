@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -23,37 +24,35 @@ namespace hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class FieldTextTest extends \Helpers
-{
+class FieldTextTest extends \Helpers {
 
-    public function test1()
-    {
+    public function test1() {
 
         $inputName = 'form_test_input1';
 
         $post = [
-            $inputName => 'New value'
+            $inputName => 'New-X-value'
         ];
 
         $stored = [
-            'input1' => 'DB value'
+            'input1' => 'DB-X-value'
         ];
 
         $form = new FormPost('test', $post, null, $stored);
 
         $input1 = new FieldText('input1', _('Title'));
-        $input1->setDefaultValue('Default value');
+        $input1->setDefaultValue('Default-X-value');
+        $input1->setValueTransformation('remove_strange_x', function ($value) {
+            return str_replace('-X-', ' ', $value);
+        });
         $form->addChild($input1);
 
         $this->assertEquals($inputName, $input1->getHtmlName());
 
-        $this->assertEquals('New value', $input1->getValueToUse(),
-                            'Wrong valueToUse');
-        $this->assertEquals('DB value', $input1->getValueStored(),
-                            'Wrong valueStored');
-        $this->assertEquals('New value', $input1->getValueUser(),
-                            'Wrong valueUser');
-        $this->assertEquals('Default value', $input1->getValueDefault(),
-                            'Wrong valueDefault');
+        $this->assertEquals('New value', $input1->getValueToUse(), 'Wrong valueToUse');
+        $this->assertEquals('DB value', $input1->getValueStored(), 'Wrong valueStored');
+        $this->assertEquals('New value', $input1->getValueUser(), 'Wrong valueUser');
+        $this->assertEquals('Default value', $input1->getValueDefault(), 'Wrong valueDefault');
     }
+
 }

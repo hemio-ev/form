@@ -7,9 +7,11 @@ use hemio\form\exception;
 /**
  *
  */
-abstract class FormElement extends \hemio\form\Container
-{
-    protected $name     = '';
+abstract class FormElement extends \hemio\form\Container {
+
+    use \hemio\form\Trait_\MaintainsTransformations;
+
+    protected $name = '';
     protected $idSuffix = null;
 
     /**
@@ -25,8 +27,7 @@ abstract class FormElement extends \hemio\form\Container
      * @return Abstract_\Form
      * @throws exception\NotLazyEnough
      */
-    public function getForm()
-    {
+    public function getForm() {
         if ($this->existsInheritableAppendage('_FORM'))
             return $this->getInheritableAppendage('_FORM');
         else {
@@ -40,8 +41,7 @@ abstract class FormElement extends \hemio\form\Container
      *
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -50,12 +50,11 @@ abstract class FormElement extends \hemio\form\Container
      * @param array $extraKeys
      * @return string
      */
-    public function getHtmlName(array $extraKeys = [])
-    {
+    public function getHtmlName(array $extraKeys = []) {
         return sprintf('%s_%s%s'
-            , $this->getForm()->getHtmlName()
-            , $this->getName()
-            , implode('_', $extraKeys)
+                , $this->getForm()->getHtmlName()
+                , $this->getName()
+                , implode('_', $extraKeys)
         );
     }
 
@@ -64,18 +63,19 @@ abstract class FormElement extends \hemio\form\Container
      * @param array $extraKeys
      * @return string
      */
-    public function getHtmlId(array $extraKeys = [])
-    {
+    public function getHtmlId(array $extraKeys = []) {
         return sprintf('%s_%s%s'
-            , $this->getForm()->getHtmlName()
-            , $this->getName()
-            , $this->idSuffix === null ? '' : '_'.$this->idSuffix
-            , implode('_', $extraKeys)
+                , $this->getForm()->getHtmlName()
+                , $this->getName()
+                , $this->idSuffix === null ? '' : '_' . $this->idSuffix
+                , implode('_', $extraKeys)
         );
     }
 
-    public function getValueUser()
-    {
-        return $this->getForm()->getValueUser($this->getHtmlName());
+    public function getValueUser() {
+        return $this->withTransformations(
+                        $this->getForm()->getValueUser($this->getHtmlName())
+        );
     }
+
 }
