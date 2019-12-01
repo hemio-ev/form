@@ -33,7 +33,7 @@ class CheckEmail extends Check {
 
     public function __invoke($email) {
         $exploded = explode('@', $email);
-        $exploded[] = idn_to_ascii(array_pop($exploded));
+        $exploded[] = idn_to_ascii(array_pop($exploded), IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46);
         $addressAscii = implode('@', $exploded);
 
         $valid = filter_var($addressAscii, FILTER_VALIDATE_EMAIL) !== false;
