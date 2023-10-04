@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2014 Michael Herold <quabla@hemio.de>
+ * Copyright (C) 2014 Sophie Herold <sophie@hemio.de>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ namespace hemio\form\exception;
  * This exception is raised if an appendage has an unexpected type.
  *  Unfortunately there is no other way to ensure type safety in appendages.
  *
- * @author Michael Herold <quabla@hemio.de>
+ * @author Sophie Herold <sophie@hemio.de>
  */
 class AppendageTypeError extends \Exception {
     

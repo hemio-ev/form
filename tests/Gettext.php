@@ -11,7 +11,7 @@ namespace hemio\form;
 /**
  * Test gettext features
  *
- * @author Michael Herold <quabla@hemio.de>
+ * @author Sophie Herold <sophie@hemio.de>
  */
 class Gettext extends \Helpers {
 
