@@ -36,7 +36,6 @@ class CheckPattern extends Check {
      */
     public function __construct($id, $pattern, $message = null) {
         $this->pattern = '/^' . $pattern . '$/';
-        $this->check = $this;
         $this->id = $id;
         $this->message = $message;
 

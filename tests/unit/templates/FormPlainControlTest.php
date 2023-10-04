@@ -25,7 +25,9 @@ namespace hemio\form\template;
  * @author Sophie Herold <sophie@hemio.de>
  */
 class FormPlainControlTest extends \Helpers {
-
+    /**
+    * @doesNotPerformAssertions
+    */
     public function test1() {
         $form = new \hemio\form\FormPost('test');
 
