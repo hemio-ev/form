@@ -30,7 +30,6 @@ class CheckMaxLength extends Check {
 
     public function __construct($maxLength) {
         $this->maxLength = $maxLength;
-        $this->check = $this;
         $this->id = 'max_length';
         $this->message = 'The maximal length of ' . $maxLength . ' is exceeded.';
     }

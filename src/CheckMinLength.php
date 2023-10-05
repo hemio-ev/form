@@ -30,7 +30,6 @@ class CheckMinLength extends Check {
 
     public function __construct($minLength) {
         $this->minLength = $minLength;
-        $this->check = $this;
         $this->id = 'min_length';
         $this->message = 'The minimal length of ' . $minLength . ' is not reached.';
     }
